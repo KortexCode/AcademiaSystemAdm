@@ -1,6 +1,6 @@
 import { createHashRouter, createRoutesFromElements, Route } from "react-router-dom";
 import { Layout } from "../layout/Layout";
-import { HomePage } from "../pages/HomePage";
+import { HomePage } from "../pages/homePage";
 
 const router = createHashRouter(
     createRoutesFromElements(
