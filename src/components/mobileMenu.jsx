@@ -35,7 +35,7 @@ const navStyle = ({isActive}) => {
 function MobileMenu() {
 
     return(
-       <div  className="absolute end-0 top-full w-36 rounded-b-lg bg-primary-color">
+       <div  className="absolute end-0 top-full w-36 rounded-b-lg bg-primary-color z-20">
             <ul className="py-3.5 pl-5 text-xs font-bold list-disc">
                { links.map((item, index) => (
                         <li key={item.root}>
