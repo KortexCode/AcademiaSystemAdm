@@ -5,6 +5,9 @@ export default {
     extend: {
       colors: {
         "primary-color": "#FF822F",
+        textInactived: "#1D1C1C",
+        textActived: "#581B0C",
+        "secondary-color": "#B9DA13",
       },
     },
   },
