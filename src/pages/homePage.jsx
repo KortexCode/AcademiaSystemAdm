@@ -17,7 +17,7 @@ function HomePage() {
       <main className='w-full pt-8'>
         <section className='w-full h-64'>
           <div className='relative w-full h-full flex flex-col justify-evenly items-center text-center'>
-            <h1 className='w-4/5 text-2xl font-bold text-textTitle z-10'>ACADEMIA DE BAILE CARINA CELEDÓN</h1>
+            <h1 className='w-4/5 text-4xl font-bold text-textTitle z-10'>ACADEMIA DE BAILE CARINA CELEDÓN</h1>
             <p className='font-bold text-white z-10'>Somos una academia de baile con 4 años de experiencia en danzas</p>
             <CrossLink to="programas" className="z-10">
               <button className='p-2 rounded-lg text-base font-bold bg-secondary-color z-10'>VER PROGRAMAS</button>
@@ -47,14 +47,14 @@ function HomePage() {
           </div>
 
           <div className='w-full mb-4 pb-2 shadow-sm'>
-            <h2 className=" mb-4 text-xl font-bold">Concurso de género urbano kid's talent </h2>
+            <h2 className=" mb-4 text-xl font-bold">Concurso de género urbano kid&apos;s talent </h2>
             <p className="mb-3 font-bold">Próximamente 1 de Noviembre</p>
-            <p className="mb-3 font-semibold">Estaremos participando en el concurso Kid's Talent de la agencia Dance Revolution por la categoría infantil en el auditorio Pasaje del bosque</p>     
+            <p className="mb-3 font-semibold">Estaremos participando en el concurso Kid&apos;s Talent de la agencia Dance Revolution por la categoría infantil en el auditorio Pasaje del bosque</p>     
           </div>
         </section>
-        <section className='w-full'>
+        <section className='w-full my-8'>
           <h2 className='text-xl font-bold text-primary-color text-center'>Conoce Nuestra Ubicación</h2>
-          <div className='flex items-center justify-center w-full h-60 mt-6 mb-4 rounded-lg bg-slate-800'>
+          <div className='flex items-center justify-center w-full h-60 mt-6 rounded-lg bg-slate-800'>
                 <p className='text-white'>Aquí va el mapa de navegación</p>
           </div>
         </section>

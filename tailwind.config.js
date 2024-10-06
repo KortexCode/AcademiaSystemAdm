@@ -13,6 +13,9 @@ export default {
         textActived: "#581B0C",
         textCard: "#302D2D",
       },
+      boxShadow: {
+        shadowTop: "0 0 4px 2px",
+      },
       fontFamily: {
         inria: ['"Inria Sans"', "sans-serif"],
       },
