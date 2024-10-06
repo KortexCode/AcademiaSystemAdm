@@ -11,6 +11,7 @@ export default {
         textTitle: "#FFAF02",
         textInactived: "#1D1C1C",
         textActived: "#581B0C",
+        textCard: "#302D2D",
       },
       fontFamily: {
         inria: ['"Inria Sans"', "sans-serif"],
