@@ -14,7 +14,7 @@ function Header() {
     }
 
     return (
-        <header className="w-full h-9 fixed top-0 shadow z-20">
+        <header className="w-full h-9 fixed top-0 shadow z-30">
             <nav className="flex flex-row items-center justify-between w-full h-full
             border-b border-solid border-orange-700 bg-primary-color">
                 <p className="ml-4">Logo</p>

@@ -26,6 +26,7 @@ function HomePage() {
             <div className='absolute w-full h-full bg-front-background opacity-75 top-0'></div>
           </div>
         </section>
+
         <section className='w-11/12 pt-3 my-0 mx-auto text-sm text-textBody text-justify'>
             <p className='font-semibold'>La Academia De Baile Carina Celedón enseña el arte de bailar los diferentes tipos de danzas  o bailes más conocidos y representativos. </p>
             <p className='mt-1 font-semibold'>El primer objetivo es enseñar a bailar los 4 ritmos de la música Vallenata como baile de salón y de fiesta de forma personalizado o semipersonalizado. </p>
@@ -33,10 +34,12 @@ function HomePage() {
               <p className='text-white'>Video de presentación</p>
             </div>
         </section>
+
         <Element name="programas" className='flex flex-col items-center w-11/12 pt-8 my-0 mx-auto text-sm text-textBody'>
           <h1 className='mb-8 text-4xl font-bold text-primary-color text-center'>PROGRAMAS</h1>
           {cardInfo.map((item, index) => (<CourseCard key={index} title={item.title} img={item.img} descrip={item.description} to={item.to} />))} 
         </Element>
+
         <section className='w-11/12 pt-8 my-0 mx-auto text-sm text-textBody'>
           <h1 className='mb-8 text-4xl font-bold text-primary-color text-center'>PRÓXIMAS PRESENTACIONES</h1>
           
@@ -52,6 +55,7 @@ function HomePage() {
             <p className="mb-3 font-semibold">Estaremos participando en el concurso Kid&apos;s Talent de la agencia Dance Revolution por la categoría infantil en el auditorio Pasaje del bosque</p>     
           </div>
         </section>
+        
         <section className='w-full my-8'>
           <h2 className='text-xl font-bold text-primary-color text-center'>Conoce Nuestra Ubicación</h2>
           <div className='flex items-center justify-center w-full h-60 mt-6 rounded-lg bg-slate-800'>

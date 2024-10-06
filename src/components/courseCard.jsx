@@ -1,4 +1,12 @@
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
+CourseCard.propTypes = {
+    title: PropTypes.string.isRequired,
+    img: PropTypes.string.isRequired,
+    descrip: PropTypes.string.isRequired,
+    to: PropTypes.string.isRequired,
+}
 
 function CourseCard(props) {
     const {title, img, descrip, to} = props;
@@ -14,10 +22,13 @@ function CourseCard(props) {
             </div>
             <div className='w-full px-2 pb-2'>
                 <p className='my-3 font-semibold '>{descrip}</p>
-                <button className='p-2 rounded-lg shadow-sm shadow-black font-bold bg-secondary-color text-textCard'>Más información</button>
+                <Link to={to}>
+                    <button className='p-2 rounded-lg shadow-sm shadow-black font-bold bg-secondary-color text-textCard'>Más información</button>
+                </Link>
             </div>
         </div>
     )
 }
+
 
 export {CourseCard}
