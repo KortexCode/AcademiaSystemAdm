@@ -1,5 +1,9 @@
 
+import { Link } from "react-router-dom";
+
 function Footer() {
+
+ 
 
     return (
         <footer className="bg-stone-950">
@@ -25,7 +29,7 @@ function Footer() {
                 <div className="mb-4">
                   <h3 className="titleTextFooter">Enlaces Útiles</h3>
                   <ul className="basicTextFooter">
-                    <li className="mb-1"><a href="#about-us">Sobre Nosotros</a></li>
+                    <li className="mb-1"><Link to="/sobre-nosotros">Sobre Nosotros</Link></li>
                     <li className="mb-1"><a href="#work-with-us">Trabaja con Nosotros</a></li>
                     <li><a href="#services">Servicios</a></li>
                   </ul>

@@ -7,6 +7,7 @@ import { TrainingProgram } from "../pages/trainingProgram";
 import { PersonalizedProgram } from "../pages/personalizedProgram";
 import { SemiPersonalizedProgram } from "../pages/semiPersonalizedProgram";
 import { TherapyDanceProgram } from "../pages/therapyDanceProgram";
+import { Performance } from "../pages/performance";
 
 const router = createHashRouter(
     createRoutesFromElements(
@@ -17,6 +18,7 @@ const router = createHashRouter(
              <Route path="/personalizado" element={<PersonalizedProgram />} />
              <Route path="/semi-personalizado" element={<SemiPersonalizedProgram />} />
              <Route path="/bailo-terapia" element={<TherapyDanceProgram />} />
+             <Route path="/presentaciones" element={<Performance />} />
         </Route>      
     )
 )
