@@ -2,7 +2,7 @@ function HomePage() {
   return (
     <>
       <section className="w-full h-full bg-bdBackground">
-        <div className="flex flex-col items-center justify-center md:w-[460px] my-0 mx-auto h-full min-h-screen bg-white px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col items-center justify-center md:w-[480px] my-0 mx-auto h-full min-h-screen bg-white px-4 sm:px-6 lg:px-8">
           <div className="max-w-md w-full space-y-8">
             <h1 className="text-center text-3xl font-extrabold text-zinc-900">
               Academia DB
