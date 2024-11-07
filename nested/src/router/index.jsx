@@ -14,7 +14,7 @@ const router = createHashRouter(
     <Route path="/" element={<Layout />} errorElement={<NotFound />}>
       <Route index={true} path="/" element={<HomePage />} />
       <Route index={true} path="/menu" element={<Menu />} />
-      <Route index={true} path="/personas" element={<PersonPage />} />
+      <Route index={true} path="/menu/personas" element={<PersonPage />} />
     </Route>
   )
 );
