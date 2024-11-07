@@ -2,6 +2,7 @@ import personasImg from "../assets/personas_2.jpg";
 import registerImg from "../assets/inscripcion_1.jpg";
 import programsImg from "../assets/programs_1.jpg";
 import accountingImg from "../assets/accounting_1.jpg";
+import { Link } from "react-router-dom";
 
 function Menu() {
   const userName = "Admin";
@@ -23,9 +24,12 @@ function Menu() {
                 alt="Personas Icono"
                 className="w-full h-36 rounded-lg"
               />
-              <button className="w-full py-2 rounded-md text-lg text-zinc-900 font-semibold bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
-                Personas
-              </button>
+              <Link to={'/personas'} className="w-full">
+                <button className="w-full py-2 rounded-md text-lg text-zinc-900 font-semibold bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
+                  Personas
+                </button>
+              </Link>
+              
             </div>
 
             <div className="flex flex-col items-center space-y-2 shadow-xl">
