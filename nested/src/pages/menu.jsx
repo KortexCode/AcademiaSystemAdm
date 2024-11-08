@@ -21,9 +21,9 @@ function Menu() {
             <img
               src={personasImg}
               alt="Personas Icono"
-              className="w-full h-36 rounded-b-lg"
+              className="w-full h-36"
             />
-            <Link to={"/personas"} className="w-full">
+            <Link to={"/menu/personas"} className="w-full">
               <button className="w-full py-2 rounded-md text-lg text-zinc-900 font-semibold bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
                 Personas
               </button>
@@ -34,7 +34,7 @@ function Menu() {
             <img
               src={programsImg}
               alt="Programas Icono"
-              className="w-full h-36 rounded-b-lg object-cover"
+              className="w-full h-36 object-cover"
             />
             <button className="w-full py-2 text-zinc-900 font-semibold text-lg rounded-md bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
               Programas
@@ -45,7 +45,7 @@ function Menu() {
             <img
               src={registerImg}
               alt="Inscripciones Icono"
-              className="w-full h-36 rounded-b-lg object-cover"
+              className="w-full h-36 object-cover"
             />
             <button className="w-full py-2 text-zinc-900 font-semibold text-lg rounded-md bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
               Inscripciones
@@ -56,7 +56,7 @@ function Menu() {
             <img
               src={accountingImg}
               alt="Contabilidad Icono"
-              className="w-full h-36 rounded-b-lg object-cover "
+              className="w-full h-36 object-cover "
             />
             <button className="w-full py-2 text-zinc-900 font-semibold text-lg rounded-md bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
               Contabilidad

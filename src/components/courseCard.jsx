@@ -14,7 +14,7 @@ function CourseCard(props) {
   console.log(to);
 
   return (
-    <div className="w-80 mb-4 pb-2 shadow-sm shadow-black rounded-lg">
+    <div className="w-full mb-4 pb-2 shadow-sm shadow-black rounded-lg">
       <div className="relative flex items-center justify-center w-full h-32 rounded-t-lg">
         <p className="text-3xl font-bold text-textTitle text-center z-20">
           {title}
