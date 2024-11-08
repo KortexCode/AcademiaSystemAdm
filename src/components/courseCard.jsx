@@ -11,8 +11,6 @@ CourseCard.propTypes = {
 function CourseCard(props) {
   const { title, img, descrip, to } = props;
 
-  console.log(to);
-
   return (
     <div className="w-full mb-4 pb-2 shadow-sm shadow-black rounded-lg">
       <div className="relative flex items-center justify-center w-full h-32 rounded-t-lg">
