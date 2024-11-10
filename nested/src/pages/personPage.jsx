@@ -50,9 +50,13 @@ function PersonPage() {
             </label>
           </div>
         </div>
-        <button className="px-4 py-3 font-medium rounded-md text-zinc-900 bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
-          Agregar Persona
-        </button>
+        {/*Botón agregar personas*/}
+        <Link to="/menu/personas/agregar-personas" className="block">
+          <button className="px-4 py-3 font-medium rounded-md text-zinc-900 bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
+            Agregar Persona
+          </button>
+        </Link>
+
         {/* Tabla de resultados */}
         <TableData columnData={columnData} />
       </div>
