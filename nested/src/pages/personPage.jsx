@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
 import { TableData } from "../components/tableData";
+import { useState } from "react";
 
-const columnData = [
+const columnDataInstructor = [
   "ID",
   "Nombre",
-  "Apelldio",
+  "Apellido",
   "Edad",
   "Sexo",
   "Dirección",
@@ -12,11 +13,108 @@ const columnData = [
   "Correo",
   "Seguridad Social",
   "Patología",
+  "Perfil",
+  "Profesion",
+  "Disponibilidad",
+  "Horas",
   "Fecha de registro",
   "Acciones",
 ];
 
+const rowDataInstructor = [
+  {
+    id: "1233",
+    personName: "Donald",
+    lastName: "Trump",
+    age: "70",
+    sexo: "Masculino",
+    adress: "White House main av",
+    cellPhone: "300-6765-234",
+    email: "president_2024@gmail.com",
+    social_segurity: "Si",
+    pathology: "Ninguna",
+    perfil: "Bailarín profesional en géneros de los 80's",
+    profesion: "Artes Escenicas",
+    disponibilidad: "TARDE",
+    horas: "4",
+    recordDate: "05/11/2024",
+  },
+];
+
+const columnDataStudent = [
+  "ID",
+  "Nombre",
+  "Apellido",
+  "Edad",
+  "Sexo",
+  "Dirección",
+  "Teléfono",
+  "Correo",
+  "Seguridad Social",
+  "Patología",
+  "Acudiente",
+  "Teléfono Acudiente",
+  "Teléfono Acudiente Alt",
+  "Ocupación",
+  "Fecha de registro",
+  "Acciones",
+];
+
+const rowDataStudent = [
+  {
+    id: "1223",
+    personName: "Jhoana",
+    lastName: "Galindo",
+    age: "20",
+    sexo: "Femenino",
+    adress: "calle 13 #67-23",
+    cellPhone: "345-567-232",
+    email: "johana_galindo@gmail.com",
+    social_segurity: "Si",
+    pathology: "Ninguna",
+    acudiente: "Paola Galindo",
+    telAcudi: "323-123-121",
+    telAcudiAlt: "451-345-123",
+    ocupacion: "Estudiante",
+    recordDate: "05/11/2024",
+  },
+  {
+    id: "1223",
+    personName: "Luzdeluna",
+    lastName: "Cortés",
+    age: "12",
+    sexo: "Femenino",
+    adress: "calle 16 #27-23 los Sinamorroles",
+    cellPhone: "315-567-2327",
+    email: "iam_raito@gmail.com",
+    social_segurity: "Si",
+    pathology: "Alergica a los gatos",
+    acudiente: "Beatriz Montes",
+    telAcudi: "318-112-1217",
+    telAcudiAlt: "300-345-1232",
+    ocupacion: "Estudiante",
+    recordDate: "05/11/2024",
+  },
+];
+
 function PersonPage() {
+  const [colum, setColum] = useState(columnDataStudent);
+  const [rows, setRows] = useState(rowDataStudent);
+  const [radioInputOn, setRadioInputOn] = useState(true);
+
+  const handleShowStundents = () => {
+    if (radioInputOn === false) {
+      setRadioInputOn(true);
+      setColum(columnDataStudent);
+      setRows(rowDataStudent);
+    }
+  };
+  const handleShowInstructors = () => {
+    setRadioInputOn(false);
+    setColum(columnDataInstructor);
+    setRows(rowDataInstructor);
+  };
+
   return (
     <div className="flex flex-col items-center min-h-screen bg-white px-4 pb-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl w-full space-y-6">
@@ -51,14 +149,37 @@ function PersonPage() {
           </div>
         </div>
         {/*Botón agregar personas*/}
+
         <Link to="/menu/personas/agregar-personas" className="block">
           <button className="px-4 py-3 font-medium rounded-md text-zinc-900 bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
             Agregar Persona
           </button>
         </Link>
 
+        <div className="flex space-x-4">
+          <div className="flex items-center justify-start py-2">
+            <input
+              type="radio"
+              checked={radioInputOn}
+              onChange={handleShowStundents}
+            />
+            <span id="checkStudent" className="ml-2 text-gray-700">
+              Estudiantes
+            </span>
+          </div>
+          <div className="flex items-center justify-start py-2">
+            <input
+              id="checkInstructor"
+              type="radio"
+              checked={!radioInputOn}
+              onChange={handleShowInstructors}
+            />
+            <span className="ml-2 text-gray-700">Instructores</span>
+          </div>
+        </div>
+
         {/* Tabla de resultados */}
-        <TableData columnData={columnData} />
+        <TableData columnData={colum} rowData={rows} />
       </div>
     </div>
   );
