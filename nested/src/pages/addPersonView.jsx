@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-function AddPerson() {
+function AddPersonView() {
   const [isStudent, setIsStudent] = useState(true);
   const [textAreaValue, setTextAreaValue] = useState("");
 
@@ -222,4 +222,4 @@ function AddPerson() {
   );
 }
 
-export { AddPerson };
+export { AddPersonView };

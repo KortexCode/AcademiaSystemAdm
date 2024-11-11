@@ -97,7 +97,7 @@ const rowDataStudent = [
   },
 ];
 
-function PersonPage() {
+function PersonView() {
   const [colum, setColum] = useState(columnDataStudent);
   const [rows, setRows] = useState(rowDataStudent);
   const [radioInputOn, setRadioInputOn] = useState(true);
@@ -120,7 +120,7 @@ function PersonPage() {
       <div className="max-w-7xl w-full space-y-6">
         <Link to={"/menu"}>Back</Link>
         {/* Título y botón de agregar */}
-        <div className="pt-4 flex items-center justify-between">
+        <div className="flex items-center justify-between">
           <h1 className="text-4xl font-extrabold text-gray-900">Personas</h1>
         </div>
 
@@ -185,4 +185,4 @@ function PersonPage() {
   );
 }
 
-export { PersonPage };
+export { PersonView };

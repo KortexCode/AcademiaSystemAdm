@@ -4,7 +4,7 @@ import programsImg from "../assets/programs_1.jpg";
 import accountingImg from "../assets/accounting_1.jpg";
 import { Link } from "react-router-dom";
 
-function Menu() {
+function MenuView() {
   const userName = "Admin";
 
   return (
@@ -36,9 +36,11 @@ function Menu() {
               alt="Programas Icono"
               className="w-full h-36 object-cover"
             />
-            <button className="w-full py-2 text-zinc-900 font-semibold text-lg rounded-md bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
-              Programas
-            </button>
+            <Link to={"/menu/programas"} className="w-full">
+              <button className="w-full py-2 rounded-md text-lg text-zinc-900 font-semibold bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
+                Programas
+              </button>
+            </Link>
           </div>
 
           <div className="flex flex-col items-center rounded-b-lg space-y-2 shadow-md shadow-black">
@@ -47,9 +49,11 @@ function Menu() {
               alt="Inscripciones Icono"
               className="w-full h-36 object-cover"
             />
-            <button className="w-full py-2 text-zinc-900 font-semibold text-lg rounded-md bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
-              Inscripciones
-            </button>
+            <Link to={"/menu/inscripcion"} className="w-full">
+              <button className="w-full py-2 rounded-md text-lg text-zinc-900 font-semibold bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
+                Inscripciones
+              </button>
+            </Link>
           </div>
 
           <div className="flex flex-col items-center rounded-b-lg space-y-2 shadow-md shadow-black">
@@ -68,4 +72,4 @@ function Menu() {
   );
 }
 
-export { Menu };
+export { MenuView };
