@@ -17,7 +17,7 @@ function TableData(props) {
   return (
     <div className="overflow-x-auto bg-white shadow-md">
       <table className="min-w-full table-fixed border-collapse border border-slate-400 text-left">
-        <thead className="bg-gray-300">
+        <thead className="bg-gray-300 ">
           <tr>
             {columnData.map((item, index) => (
               <th

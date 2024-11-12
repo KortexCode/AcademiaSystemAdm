@@ -1,4 +1,19 @@
+import { useNavigate } from "react-router-dom";
+
 function HomePage() {
+  const navigate = useNavigate();
+  /* Lógica para inicio de sesión */
+  const handleSession = () => {
+    const form = document.getElementById("formSession");
+    const formData = new FormData(form);
+    const dataForm = Object.fromEntries(formData.entries());
+
+    if (dataForm.user === "" || dataForm.password === "") {
+      alert("Debes llenar los campos vacios para iniciar sesión");
+    } else {
+      navigate("./menu");
+    }
+  };
   return (
     <>
       <section className="w-full h-full bg-bdBackground">
@@ -7,7 +22,7 @@ function HomePage() {
             <h1 className="text-center text-3xl font-extrabold text-zinc-900">
               Academia DB
             </h1>
-            <form className="mt-8 space-y-6">
+            <form id="formSession" className="mt-8 space-y-6">
               <div className="rounded-md shadow-sm -space-y-px">
                 <div className="mb-4">
                   <label htmlFor="usuario" className="sr-only">
@@ -15,7 +30,7 @@ function HomePage() {
                   </label>
                   <input
                     id="usuario"
-                    name="usuario"
+                    name="user"
                     type="text"
                     required
                     className="appearance-none relative block w-full px-3 py-2 border border-gray-400 placeholder-gray-400 text-gray-900 rounded-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
@@ -28,7 +43,7 @@ function HomePage() {
                   </label>
                   <input
                     id="contraseña"
-                    name="contraseña"
+                    name="password"
                     type="password"
                     required
                     className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-400 placeholder-gray-400 text-gray-900 focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
@@ -50,8 +65,8 @@ function HomePage() {
 
               <div>
                 <button
-                  type="submit"
                   className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-lg font-semibold rounded-md text-zinc-900 bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+                  onClick={handleSession}
                 >
                   Ingresar
                 </button>

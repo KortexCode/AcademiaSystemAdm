@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
 import { TableData } from "../components/tableData";
+import { ArrowBackIcon } from "../components/arrowBackIcon";
 /* import { useState } from "react"; */
 
 const columnDataProgram = [
@@ -39,9 +39,7 @@ function ProgramView() {
   return (
     <div className="flex flex-col items-center min-h-screen bg-white px-4 pb-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl w-full space-y-7">
-        <Link to={"/menu"} className="inline-block my-4">
-          Back
-        </Link>
+        <ArrowBackIcon root={"/menu"} />
         {/* Título y botón de agregar */}
         <div className="flex items-center justify-between">
           <h1 className="text-4xl font-extrabold text-gray-900">Programas</h1>

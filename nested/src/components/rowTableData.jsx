@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+/* import { ActionsTable } from "./actionsTable"; */
 
 RowTableData.propTypes = {
   rowData: PropTypes.array.isRequired,
@@ -15,6 +16,8 @@ function RowTableData(props) {
           {item}
         </td>
       ))}
+      {/* <ActionsTable editar= /> */}
+
       <td className="px-4 py-2 whitespace-nowrap text-sm font-medium">
         <button className="mr-2 text-primary hover:text-primary-dark">
           Editar

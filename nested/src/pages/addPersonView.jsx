@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { ArrowBackIcon } from "../components/arrowBackIcon";
 
 function AddPersonView() {
   const [isStudent, setIsStudent] = useState(true);
@@ -17,7 +17,7 @@ function AddPersonView() {
         <h1 className="text-3xl font-extrabold text-gray-900 text-center">
           Registrar Personas
         </h1>
-        <Link to={"/menu/personas"}>Back</Link>
+        <ArrowBackIcon root={"/menu/personas"} />
         {/* Formulario principal */}
         <form>
           <div className="space-y-4">
@@ -208,10 +208,10 @@ function AddPersonView() {
           )}
 
           {/* Botón de registrar */}
-          <div className="flex justify-center mt-6">
+          <div className="w-full md:w-80 flex mt-6">
             <button
               type="button"
-              className="px-6 py-3 font-medium rounded-md text-zinc-900 bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+              className="w-full px-6 py-3 font-medium rounded-md text-zinc-900 bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
             >
               Registrar
             </button>

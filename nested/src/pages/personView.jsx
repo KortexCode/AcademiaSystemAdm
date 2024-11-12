@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
-import { TableData } from "../components/tableData";
+import { TableDataPerson } from "../components/tableDataPerson";
 import { useState } from "react";
+import { ArrowBackIcon } from "../components/arrowBackIcon";
 
 const columnDataInstructor = [
   "ID",
@@ -118,7 +119,7 @@ function PersonView() {
   return (
     <div className="flex flex-col items-center min-h-screen bg-white px-4 pb-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl w-full space-y-6">
-        <Link to={"/menu"}>Back</Link>
+        <ArrowBackIcon root={"/menu"} />
         {/* Título y botón de agregar */}
         <div className="flex items-center justify-between">
           <h1 className="text-4xl font-extrabold text-gray-900">Personas</h1>
@@ -179,7 +180,7 @@ function PersonView() {
         </div>
 
         {/* Tabla de resultados */}
-        <TableData columnData={colum} rowData={rows} />
+        <TableDataPerson columnData={colum} rowData={rows} />
       </div>
     </div>
   );

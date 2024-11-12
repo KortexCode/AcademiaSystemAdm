@@ -17,7 +17,7 @@ function MenuView() {
         </p>
 
         <div className="grid grid-cols-2 gap-6 mt-4">
-          <div className="flex flex-col items-center rounded-b-lg space-y-2 shadow-md shadow-black">
+          <div className="w-[150px] flex flex-col items-center rounded-b-lg space-y-2 shadow-md shadow-black">
             <img
               src={personasImg}
               alt="Personas Icono"
@@ -30,7 +30,7 @@ function MenuView() {
             </Link>
           </div>
 
-          <div className="flex flex-col items-center rounded-b-lg space-y-2 shadow-md shadow-black">
+          <div className="w-[150px] flex flex-col items-center rounded-b-lg space-y-2 shadow-md shadow-black">
             <img
               src={programsImg}
               alt="Programas Icono"
@@ -43,7 +43,7 @@ function MenuView() {
             </Link>
           </div>
 
-          <div className="flex flex-col items-center rounded-b-lg space-y-2 shadow-md shadow-black">
+          <div className="w-[150px] flex flex-col items-center rounded-b-lg space-y-2 shadow-md shadow-black">
             <img
               src={registerImg}
               alt="Inscripciones Icono"
@@ -56,7 +56,7 @@ function MenuView() {
             </Link>
           </div>
 
-          <div className="flex flex-col items-center rounded-b-lg space-y-2 shadow-md shadow-black">
+          <div className="w-[150px] flex flex-col items-center rounded-b-lg space-y-2 shadow-md shadow-black">
             <img
               src={accountingImg}
               alt="Contabilidad Icono"

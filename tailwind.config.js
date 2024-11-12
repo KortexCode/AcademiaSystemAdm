@@ -23,7 +23,10 @@ export default {
         shadowTop: "0 0 4px 2px",
       },
       fontFamily: {
-        inria: ['"Inria Sans"', "sans-serif"],
+        inria: ["Inria Sans", "sans-serif"],
+      },
+      screens: {
+        mobile: "360px",
       },
     },
   },
