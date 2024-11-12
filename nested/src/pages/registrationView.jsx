@@ -106,8 +106,8 @@ function RegistrationView() {
             className="w-auto px-4 py-2 border border-gray-400 rounded-md focus:outline-none focus:ring-primary focus:border-primary"
             required
           >
-            <option value="Masculino">Horaio a elegir</option>
-            <option value="Masculino">Horaio a elegir</option>
+            <option value="Masculino">Horario a elegir</option>
+            <option value="Masculino">Horario a elegir</option>
           </select>
         </div>
 
