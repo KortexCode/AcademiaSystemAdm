@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
-import { TableData } from "../components/tableData";
-import { RowTableData } from "../components/rowTableData";
+import { Table } from "../components/table";
 import { useState } from "react";
 import { ArrowBackIcon } from "../components/arrowBackIcon";
 
@@ -181,25 +180,21 @@ function PersonView() {
         </div>
 
         {/* Tabla de resultados */}
-        <TableData columnData={colum}>
-          {rows.map((item, index) => (
-            <RowTableData rowData={item} key={index}>
-              <td className="px-4 py-2 whitespace-nowrap text-sm font-medium">
-                <button className="mr-2 text-primary hover:text-primary-dark">
-                  Editar
-                </button>
-                |
-                <button className="mx-2 text-red-600 hover:text-red-800">
-                  Eliminar
-                </button>
-                |
-                <button className="mx-2 text-blue-600 hover:text-red-800">
-                  Inscribir
-                </button>
-              </td>
-            </RowTableData>
-          ))}
-        </TableData>
+        <Table ArrayColumn={colum} ArrayRows={rows}>
+          <td className="px-4 py-2 whitespace-nowrap text-sm font-medium">
+            <button className="mr-2 text-primary hover:text-primary-dark">
+              Editar
+            </button>
+            |
+            <button className="mx-2 text-red-600 hover:text-red-800">
+              Eliminar
+            </button>
+            |
+            <button className="mx-2 text-blue-600 hover:text-red-800">
+              inscribir
+            </button>
+          </td>
+        </Table>
       </div>
     </div>
   );

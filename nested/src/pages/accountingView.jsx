@@ -1,8 +1,6 @@
 import { Link } from "react-router-dom";
-/* import { TableDataPerson } from "../components/tableDataPerson"; */
-import { TableData } from "../components/tableData";
-import { RowTableData } from "../components/rowTableData";
 import { ArrowBackIcon } from "../components/arrowBackIcon";
+import { Table } from "../components/table";
 
 const colum = [
   "Nombre",
@@ -76,22 +74,17 @@ function AccountingView() {
           </button>
         </Link>
 
-        {/* Tabla de resultados */}
-        <TableData columnData={colum}>
-          {rows.map((item, index) => (
-            <RowTableData rowData={item} key={index}>
-              <td className="px-4 py-2 whitespace-nowrap text-sm font-medium">
-                <button className="mr-2 text-primary hover:text-primary-dark">
-                  Editar
-                </button>
-                |
-                <button className="mx-2 text-red-600 hover:text-red-800">
-                  Eliminar
-                </button>
-              </td>
-            </RowTableData>
-          ))}
-        </TableData>
+        <Table ArrayColumn={colum} ArrayRows={rows}>
+          <td className="px-4 py-2 whitespace-nowrap text-sm font-medium">
+            <button className="mr-2 text-primary hover:text-primary-dark">
+              Editar
+            </button>
+            |
+            <button className="mx-2 text-red-600 hover:text-red-800">
+              Eliminar
+            </button>
+          </td>
+        </Table>
       </div>
     </div>
   );

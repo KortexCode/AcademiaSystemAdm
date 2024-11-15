@@ -1,8 +1,8 @@
-import { TableData } from "../components/tableData";
+import { Table } from "../components/table";
 import { ArrowBackIcon } from "../components/arrowBackIcon";
 /* import { useState } from "react"; */
 
-const columnData = [
+const column = [
   "Nombre",
   "Apellido",
   "Programa",
@@ -12,7 +12,7 @@ const columnData = [
   "Acciones",
 ];
 
-const rowData = [
+const rows = [
   [
     "Jhoana",
     "Galindo",
@@ -109,7 +109,17 @@ function RegistrationView() {
         </div>
 
         {/* Tabla de resultados */}
-        <TableData columnData={columnData} rowData={rowData} />
+        <Table ArrayColumn={column} ArrayRows={rows}>
+          <td className="px-4 py-2 whitespace-nowrap text-sm font-medium">
+            <button className="mr-2 text-primary hover:text-primary-dark">
+              Editar
+            </button>
+            |
+            <button className="mx-2 text-red-600 hover:text-red-800">
+              Eliminar
+            </button>
+          </td>
+        </Table>
       </div>
     </div>
   );

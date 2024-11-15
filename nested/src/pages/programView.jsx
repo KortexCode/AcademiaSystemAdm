@@ -1,8 +1,8 @@
-import { TableData } from "../components/tableData";
+import { Table } from "../components/table";
 import { ArrowBackIcon } from "../components/arrowBackIcon";
 /* import { useState } from "react"; */
 
-const columnDataProgram = [
+const column = [
   "Nombre",
   "Descripción",
   "Categoría",
@@ -10,7 +10,7 @@ const columnDataProgram = [
   "Acciones",
 ];
 
-const rowDataProgram = [
+const rows = [
   [
     "Formación",
     "Se enseña a niños de 4 a 11 años las danzas folclóricas y ritmos",
@@ -53,7 +53,17 @@ function ProgramView() {
         </div>
 
         {/* Tabla de resultados */}
-        <TableData columnData={columnDataProgram} rowData={rowDataProgram} />
+        <Table ArrayColumn={column} ArrayRows={rows}>
+          <td className="px-4 py-2 whitespace-nowrap text-sm font-medium">
+            <button className="mr-2 text-primary hover:text-primary-dark">
+              Editar
+            </button>
+            |
+            <button className="mx-2 text-red-600 hover:text-red-800">
+              Eliminar
+            </button>
+          </td>
+        </Table>
       </div>
     </div>
   );
