@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { ArrowBackIcon } from "../components/arrowBackIcon";
 import { Table } from "../components/table";
+import { SelectProgramCategory } from "../components/selectProgramCategory";
 
 const colum = [
   "Nombre",
@@ -68,11 +69,15 @@ function AccountingView() {
         </div>
         {/*Botón agregar personas*/}
 
-        <Link to="/menu/contabilidad/agregar-contabilidad" className="block">
+        <Link
+          to="/menu/contabilidad/agregar-contabilidad"
+          className="inline-block"
+        >
           <button className="px-4 py-3 font-medium rounded-md text-zinc-900 bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
             Agregar Registro
           </button>
         </Link>
+        <SelectProgramCategory />
 
         <Table ArrayColumn={colum} ArrayRows={rows}>
           <td className="px-4 py-2 whitespace-nowrap text-sm font-medium">

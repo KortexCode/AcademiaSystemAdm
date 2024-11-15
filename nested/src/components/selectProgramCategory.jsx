@@ -27,11 +27,13 @@ function SelectProgramCategory() {
           Programa
         </label>
         <select
+          name="selectProgram"
           className="w-auto px-4 py-2 border border-gray-400 rounded-md focus:outline-none focus:ring-primary focus:border-primary"
           required
           onChange={handleSelectProgram}
+          defaultValue="default"
         >
-          <option value="" selected disabled>
+          <option value="default" disabled>
             Elige una opción
           </option>
           <option value="formacion">Formación</option>
@@ -46,16 +48,18 @@ function SelectProgramCategory() {
           Categoría
         </label>
         <select
+          name="selectCategory"
           className="w-auto px-4 py-2 border border-gray-400 rounded-md focus:outline-none focus:ring-primary focus:border-primary"
           required
+          defaultValue="default"
         >
           {!selectProgram.length && (
-            <option value="" selected disabled>
+            <option value="default" disabled>
               Selecciona un programa
             </option>
           )}
           {selectProgram.map((item, index) => (
-            <option key={index} value={item.toLowerCase}>
+            <option key={index} value={`${item.toLowerCase()}`}>
               {item}
             </option>
           ))}

@@ -1,11 +1,10 @@
 import { Outlet } from "react-router-dom";
+import { useGlobal } from "../hooks/useGlobal";
 
 function Layout() {
-    return (
-        <Outlet>
+  const [global] = useGlobal();
 
-        </Outlet>
-    )
+  return <Outlet context={global} />;
 }
 
-export {Layout}
+export { Layout };

@@ -3,6 +3,7 @@ import registerImg from "../assets/inscripcion_1.jpg";
 import programsImg from "../assets/programs_1.jpg";
 import accountingImg from "../assets/accounting_1.jpg";
 import { Link } from "react-router-dom";
+import { ImgMenu } from "../components/imgMenu";
 
 function MenuView() {
   const userName = "Admin";
@@ -18,11 +19,8 @@ function MenuView() {
 
         <div className="grid grid-cols-2 gap-6 mt-4">
           <div className="w-[150px] flex flex-col items-center rounded-b-lg space-y-2 shadow-md shadow-black">
-            <img
-              src={personasImg}
-              alt="Personas Icono"
-              className="w-full h-36"
-            />
+            <ImgMenu url={personasImg} alt={"Imagen de personas"} />
+
             <Link to={"/menu/personas"} className="w-full">
               <button className="w-full py-2 rounded-md text-lg text-zinc-900 font-semibold bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
                 Personas
@@ -31,11 +29,8 @@ function MenuView() {
           </div>
 
           <div className="w-[150px] flex flex-col items-center rounded-b-lg space-y-2 shadow-md shadow-black">
-            <img
-              src={programsImg}
-              alt="Programas Icono"
-              className="w-full h-36 object-cover"
-            />
+            <ImgMenu url={programsImg} alt={"Imagen de programas"} />
+
             <Link to={"/menu/programas"} className="w-full">
               <button className="w-full py-2 rounded-md text-lg text-zinc-900 font-semibold bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
                 Programas
@@ -44,11 +39,8 @@ function MenuView() {
           </div>
 
           <div className="w-[150px] flex flex-col items-center rounded-b-lg space-y-2 shadow-md shadow-black">
-            <img
-              src={registerImg}
-              alt="Inscripciones Icono"
-              className="w-full h-36 object-cover"
-            />
+            <ImgMenu url={registerImg} alt={"Imagen de inscripciones"} />
+
             <Link to={"/menu/inscripcion"} className="w-full">
               <button className="w-full py-2 rounded-md text-lg text-zinc-900 font-semibold bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
                 Inscripciones
@@ -57,11 +49,8 @@ function MenuView() {
           </div>
 
           <div className="w-[150px] flex flex-col items-center rounded-b-lg space-y-2 shadow-md shadow-black">
-            <img
-              src={accountingImg}
-              alt="Contabilidad Icono"
-              className="w-full h-36 object-cover "
-            />
+            <ImgMenu url={accountingImg} alt={"Imagen de contabilidad"} />
+
             <Link to={"/menu/contabilidad"} className="w-full">
               <button className="w-full py-2 text-zinc-900 font-semibold text-lg rounded-md bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
                 Contabilidad

@@ -51,7 +51,6 @@ function RegistrationView() {
             className="w-full sm:w-1/2 px-4 py-2 border border-gray-400 rounded-md focus:outline-none focus:ring-primary focus:border-primary"
           />
         </div>
-        {/*Botón agregar personas*/}
 
         <div>
           <label className="block mb-2 text-base font-medium text-gray-700">
