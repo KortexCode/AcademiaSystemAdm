@@ -1,6 +1,6 @@
 import { Table } from "../components/table";
 import { ArrowBackIcon } from "../components/arrowBackIcon";
-/* import { useState } from "react"; */
+import { SelectProgramCategory } from "../components/selectProgramCategory";
 
 const column = [
   "Nombre",
@@ -65,35 +65,7 @@ function RegistrationView() {
             <option value="Femenino">Femenino</option>
           </select>
         </div>
-        <div className="flex flex-wrap">
-          <div className=" mr-2">
-            <label className="block mb-2 text-base font-medium text-gray-700">
-              Programa
-            </label>
-            <select
-              className="w-auto px-4 py-2 border border-gray-400 rounded-md focus:outline-none focus:ring-primary focus:border-primary"
-              required
-            >
-              <option value="formacion">Formación</option>
-              <option value="personalizado">Personalizado</option>
-              <option value="semiPersonalizado">Semi Personalizado</option>
-              <option value="bailoTerapia">Bailo terapia</option>
-            </select>
-          </div>
-          <div className="mt-2 mobile:mt-0">
-            <label className="block mb-2 text-base font-medium text-gray-700">
-              Categoría
-            </label>
-            <select
-              className="w-auto px-4 py-2 border border-gray-400 rounded-md focus:outline-none focus:ring-primary focus:border-primary"
-              required
-            >
-              <option value="Masculino">Elección</option>
-              <option value="Masculino">Elección</option>
-              <option value="Masculino">Elección</option>
-            </select>
-          </div>
-        </div>
+        <SelectProgramCategory />
 
         <div>
           <label className="block mb-2 text-base font-medium text-gray-700">
@@ -103,8 +75,11 @@ function RegistrationView() {
             className="w-auto px-4 py-2 border border-gray-400 rounded-md focus:outline-none focus:ring-primary focus:border-primary"
             required
           >
-            <option value="Masculino">Horario a elegir</option>
-            <option value="Masculino">Horario a elegir</option>
+            <option value="sabadoAm">Sábado, 9:00 am - 12:00 pm </option>
+            <option value="sabadoPm">Sábado, 2:00 pm - 5:00 pm</option>
+            <option value="martesPm">Martes, 5:30 pm - 6:30 pm</option>
+            <option value="miercolesPm">Miércoles, 5:30 pm - 6:30 pm</option>
+            <option value="juevesPm">Jueves, 5:30 pm - 6:30 pm</option>
           </select>
         </div>
 

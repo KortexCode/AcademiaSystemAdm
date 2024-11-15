@@ -11,7 +11,6 @@ function AddAccountingView() {
 
   const handleSelectProgram = (event) => {
     const programValue = event.target.value;
-    console.log(programValue);
 
     if (programValue === "formacion") {
       setSelectProgram(["Infantil", "Juvenil", "Adulto", "Edad de oro"]);

@@ -1,5 +1,6 @@
 import { Table } from "../components/table";
 import { ArrowBackIcon } from "../components/arrowBackIcon";
+import { SelectProgramCategory } from "../components/selectProgramCategory";
 /* import { useState } from "react"; */
 
 const column = [
@@ -51,6 +52,8 @@ function ProgramView() {
             className="w-full sm:w-1/2 px-4 py-2 border border-gray-400 rounded-md focus:outline-none focus:ring-primary focus:border-primary"
           />
         </div>
+
+        <SelectProgramCategory />
 
         {/* Tabla de resultados */}
         <Table ArrayColumn={column} ArrayRows={rows}>
