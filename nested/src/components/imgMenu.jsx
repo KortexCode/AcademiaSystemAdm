@@ -14,7 +14,9 @@ function ImgMenu(props) {
 
   /* Una vez se renderice el componente se llama a la api del navegador Interceptor Observer*/
   useEffect(() => {
-    observer.observe(node.current);
+    if (node.current) {
+      observer.observe(node.current);
+    }
   }, []);
 
   return (
