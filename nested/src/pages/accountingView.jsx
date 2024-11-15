@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
-import { TableDataPerson } from "../components/tableDataPerson";
+/* import { TableDataPerson } from "../components/tableDataPerson"; */
+import { TableData } from "../components/tableData";
+import { RowTableData } from "../components/rowTableData";
 import { ArrowBackIcon } from "../components/arrowBackIcon";
 
 const colum = [
-  "ID",
   "Nombre",
   "Apellido",
   "Fecha de pago",
@@ -15,33 +16,36 @@ const colum = [
   "Abono",
   "Saldo",
   "Total",
+  "Acciones",
 ];
 
 const rows = [
-  {
-    personName: "Jhoana",
-    lastName: "Galindo",
-    date: "20/11/2024",
-    program: "Formación",
-    category: "Juvenil",
-    month: "Septiembre",
-    payment_status: "Pendiente",
-    payment_money: "40.000",
-    balance: "20.000",
-    total: "60.000",
-  },
-  {
-    personName: "Luzdeluna",
-    lastName: "Cortés",
-    date: "20/11/2024",
-    program: "Formación",
-    category: "Juvenil",
-    month: "Septiembre",
-    payment_status: "Pendiente",
-    payment_money: "40.000",
-    balance: "20.000",
-    total: "60.000",
-  },
+  [
+    "Jhoana",
+    "Galindo",
+    "20/11/2024",
+    "Formación",
+    "Juvenil",
+    "Septiembre",
+    "Matrícula",
+    "Pendiente",
+    "40.000",
+    "20.000",
+    "60.000",
+  ],
+  [
+    "Luzdeluna",
+    "Cortés",
+    "20/11/2024",
+    "Formación",
+    "Juvenil",
+    "Septiembre",
+    "Mensualidad",
+    "Pendiente",
+    "40.000",
+    "20.000",
+    "60.000",
+  ],
 ];
 
 function AccountingView() {
@@ -73,7 +77,21 @@ function AccountingView() {
         </Link>
 
         {/* Tabla de resultados */}
-        <TableDataPerson columnData={colum} rowData={rows} />
+        <TableData columnData={colum}>
+          {rows.map((item, index) => (
+            <RowTableData rowData={item} key={index}>
+              <td className="px-4 py-2 whitespace-nowrap text-sm font-medium">
+                <button className="mr-2 text-primary hover:text-primary-dark">
+                  Editar
+                </button>
+                |
+                <button className="mx-2 text-red-600 hover:text-red-800">
+                  Eliminar
+                </button>
+              </td>
+            </RowTableData>
+          ))}
+        </TableData>
       </div>
     </div>
   );

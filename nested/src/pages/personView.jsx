@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import { TableDataPerson } from "../components/tableDataPerson";
+import { TableData } from "../components/tableData";
+import { RowTableData } from "../components/rowTableData";
 import { useState } from "react";
 import { ArrowBackIcon } from "../components/arrowBackIcon";
 
@@ -23,23 +24,23 @@ const columnDataInstructor = [
 ];
 
 const rowDataInstructor = [
-  {
-    id: "1233",
-    personName: "Donald",
-    lastName: "Trump",
-    age: "70",
-    sexo: "Masculino",
-    adress: "White House main av",
-    cellPhone: "300-6765-234",
-    email: "president_2024@gmail.com",
-    social_segurity: "Si",
-    pathology: "Ninguna",
-    perfil: "Bailarín profesional en géneros de los 80's",
-    profesion: "Artes Escenicas",
-    disponibilidad: "TARDE",
-    horas: "4",
-    recordDate: "05/11/2024",
-  },
+  [
+    "1233",
+    "Donald",
+    "Trump",
+    "70",
+    "Masculino",
+    "White House main av",
+    "300-6765-234",
+    "president_2024@gmail.com",
+    "Si",
+    "Ninguna",
+    "Bailarín profesional en géneros de los 80's",
+    "Artes Escenicas",
+    "TARDE",
+    "4",
+    "05/11/2024",
+  ],
 ];
 
 const columnDataStudent = [
@@ -62,40 +63,40 @@ const columnDataStudent = [
 ];
 
 const rowDataStudent = [
-  {
-    id: "1223",
-    personName: "Jhoana",
-    lastName: "Galindo",
-    age: "20",
-    sexo: "Femenino",
-    adress: "calle 13 #67-23",
-    cellPhone: "345-567-232",
-    email: "johana_galindo@gmail.com",
-    social_segurity: "Si",
-    pathology: "Ninguna",
-    acudiente: "Paola Galindo",
-    telAcudi: "323-123-121",
-    telAcudiAlt: "451-345-123",
-    ocupacion: "Estudiante",
-    recordDate: "05/11/2024",
-  },
-  {
-    id: "1223",
-    personName: "Luzdeluna",
-    lastName: "Cortés",
-    age: "12",
-    sexo: "Femenino",
-    adress: "calle 16 #27-23 los Sinamorroles",
-    cellPhone: "315-567-2327",
-    email: "iam_raito@gmail.com",
-    social_segurity: "Si",
-    pathology: "Alergica a los gatos",
-    acudiente: "Beatriz Montes",
-    telAcudi: "318-112-1217",
-    telAcudiAlt: "300-345-1232",
-    ocupacion: "Estudiante",
-    recordDate: "05/11/2024",
-  },
+  [
+    "1223",
+    "Jhoana",
+    "Galindo",
+    "20",
+    "Femenino",
+    "calle 13 #67-23",
+    "345-567-232",
+    "johana_galindo@gmail.com",
+    "Si",
+    "Ninguna",
+    "Paola Galindo",
+    "323-123-121",
+    "451-345-123",
+    "Estudiante",
+    "05/11/2024",
+  ],
+  [
+    "1223",
+    "Luzdeluna",
+    "Cortés",
+    "12",
+    "Femenino",
+    "calle 16 #27-23 los Sinamorroles",
+    "315-567-2327",
+    "iam_raito@gmail.com",
+    "Si",
+    "Alergica a los gatos",
+    "Beatriz Montes",
+    "318-112-1217",
+    "300-345-1232",
+    "Estudiante",
+    "05/11/2024",
+  ],
 ];
 
 function PersonView() {
@@ -180,7 +181,25 @@ function PersonView() {
         </div>
 
         {/* Tabla de resultados */}
-        <TableDataPerson columnData={colum} rowData={rows} />
+        <TableData columnData={colum}>
+          {rows.map((item, index) => (
+            <RowTableData rowData={item} key={index}>
+              <td className="px-4 py-2 whitespace-nowrap text-sm font-medium">
+                <button className="mr-2 text-primary hover:text-primary-dark">
+                  Editar
+                </button>
+                |
+                <button className="mx-2 text-red-600 hover:text-red-800">
+                  Eliminar
+                </button>
+                |
+                <button className="mx-2 text-blue-600 hover:text-red-800">
+                  Inscribir
+                </button>
+              </td>
+            </RowTableData>
+          ))}
+        </TableData>
       </div>
     </div>
   );

@@ -11,26 +11,24 @@ const columnDataProgram = [
 ];
 
 const rowDataProgram = [
-  {
-    nombre: "Formación",
-    descripcion:
-      "Se enseña a niños de 4 a 11 años las danzas folclóricas y ritmos",
-    categoria: "Infantil",
-    recordDate: "05/11/2024",
-  },
-  {
-    nombre: "Formación",
-    descripcion:
-      "Se enseña a niños de 12 a 18 años las danzas folclóricas y ritmos",
-    categoria: "Juvenil",
-    recordDate: "05/11/2024",
-  },
-  {
-    nombre: "Bailo Terapia",
-    descripcion: "Ejercitar con bailes al usuario en diferentes ritmos",
-    categoria: "No Aplica",
-    recordDate: "05/11/2024",
-  },
+  [
+    "Formación",
+    "Se enseña a niños de 4 a 11 años las danzas folclóricas y ritmos",
+    "Infantil",
+    "05/11/2024",
+  ],
+  [
+    "Formación",
+    "Se enseña a niños de 12 a 18 años las danzas folclóricas y ritmos",
+    "Juvenil",
+    "05/11/2024",
+  ],
+  [
+    "Bailo Terapia",
+    "Ejercitar con bailes al usuario en diferentes ritmos",
+    "No Aplica",
+    "05/11/2024",
+  ],
 ];
 
 function ProgramView() {

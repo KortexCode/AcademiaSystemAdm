@@ -1,18 +1,12 @@
 import PropTypes from "prop-types";
-import { RowTableData } from "./rowTableData";
 
 TableData.propTypes = {
   columnData: PropTypes.array.isRequired,
-  rowData: PropTypes.array.isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 function TableData(props) {
-  const { columnData, rowData } = props;
-
-  const elementList = [];
-  rowData.forEach((element) => {
-    elementList.push(Object.values(element));
-  });
+  const { columnData, children } = props;
 
   return (
     <div className="overflow-x-auto bg-white shadow-md">
@@ -29,13 +23,7 @@ function TableData(props) {
             ))}
           </tr>
         </thead>
-        <tbody className="divide-y divide-gray-300">
-          {/* Ejemplo de un registro de persona */}
-          {elementList.map((item, index) => (
-            <RowTableData rowData={item} key={index} />
-          ))}
-          {/* Fin de un registro de persona */}
-        </tbody>
+        <tbody className="divide-y divide-gray-300">{children}</tbody>
       </table>
     </div>
   );

@@ -32,7 +32,7 @@ function AddAccountingView() {
         <h1 className="text-3xl font-extrabold text-gray-900 text-center">
           Registrar Contabilidad
         </h1>
-        <ArrowBackIcon root={"/menu/personas"} />
+        <ArrowBackIcon root={"/menu/contabilidad"} />
         {/* Formulario principal */}
         <form>
           <div className="space-y-4">

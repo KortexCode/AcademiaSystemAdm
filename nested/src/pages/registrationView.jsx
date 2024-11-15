@@ -13,28 +13,25 @@ const columnData = [
 ];
 
 const rowData = [
-  {
-    personName: "Jhoana",
-    lastName: "Galindo",
-    programa: "Formación",
-    categoria: "Juvenil",
-    Horario: "Jueves 5pm - 7pm",
-    instructor: "Donal Trump",
-  },
-  {
-    personName: "Jhoana",
-    lastName: "Galindo",
-    programa: "Formación",
-    categoria: "Juvenil",
-    Horario: "Jueves 5pm - 7pm",
-    instructor: "Donal Trump",
-  },
+  [
+    "Jhoana",
+    "Galindo",
+    "Formación",
+    "Juvenil",
+    "Jueves 5pm - 7pm",
+    "Donal Trump",
+  ],
+  [
+    "Jhoana",
+    "Galindo",
+    "Formación",
+    "Juvenil",
+    "Jueves 5pm - 7pm",
+    "Donal Trump",
+  ],
 ];
 
 function RegistrationView() {
-  /*  const [colum, setColum] = useState(columnDataStudent); */
-  /* const [rows, setRows] = useState(rowDataStudent); */
-
   return (
     <div className="flex flex-col items-center min-h-screen bg-white px-4 pb-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl w-full space-y-6">
