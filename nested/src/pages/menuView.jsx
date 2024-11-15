@@ -62,9 +62,11 @@ function MenuView() {
               alt="Contabilidad Icono"
               className="w-full h-36 object-cover "
             />
-            <button className="w-full py-2 text-zinc-900 font-semibold text-lg rounded-md bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
-              Contabilidad
-            </button>
+            <Link to={"/menu/contabilidad"} className="w-full">
+              <button className="w-full py-2 text-zinc-900 font-semibold text-lg rounded-md bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
+                Contabilidad
+              </button>
+            </Link>
           </div>
         </div>
       </div>

@@ -11,6 +11,8 @@ import { NotFound } from "../pages/notFound";
 import { AddPersonView } from "../pages/addPersonView";
 import { ProgramView } from "../pages/programView";
 import { RegistrationView } from "../pages/registrationView";
+import { AccountingView } from "../pages/accountingView";
+import { AddAccountingView } from "../pages/addAccountingView";
 
 const router = createHashRouter(
   createRoutesFromElements(
@@ -24,6 +26,11 @@ const router = createHashRouter(
       />
       <Route path="/menu/programas" element={<ProgramView />} />
       <Route path="/menu/inscripcion" element={<RegistrationView />} />
+      <Route path="/menu/contabilidad" element={<AccountingView />} />
+      <Route
+        path="/menu/contabilidad/agregar-contabilidad"
+        element={<AddAccountingView />}
+      />
     </Route>
   )
 );
