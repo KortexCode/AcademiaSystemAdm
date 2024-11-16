@@ -10,13 +10,12 @@ function SelectProgramCategory() {
       setSelectProgram(["Infantil", "Juvenil", "Adulto", "Edad de oro"]);
     } else if (
       programValue === "personalizado" ||
-      programValue === "bailoTerapia"
+      programValue === "bailoTerapia" ||
+      programValue === "todos"
     ) {
       setSelectProgram(["No aplica"]);
-    } else if (programValue === "SemiPersonalizado") {
-      setSelectProgram(["Nivel 1", "Nivel 2"]);
     } else {
-      setSelectProgram([]);
+      setSelectProgram(["Nivel 1", "Nivel 2"]);
     }
   };
 
