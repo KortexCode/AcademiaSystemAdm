@@ -83,17 +83,11 @@ function RegistrationView() {
         </div>
 
         {/* Tabla de resultados */}
-        <Table ArrayColumn={column} ArrayRows={rows}>
-          <td className="px-4 py-2 whitespace-nowrap text-sm font-medium">
-            <button className="mr-2 text-primary hover:text-primary-dark">
-              Editar
-            </button>
-            |
-            <button className="mx-2 text-red-600 hover:text-red-800">
-              Eliminar
-            </button>
-          </td>
-        </Table>
+        <Table
+          ArrayColumn={column}
+          ArrayRows={rows}
+          tableType={"generic"}
+        ></Table>
       </div>
     </div>
   );

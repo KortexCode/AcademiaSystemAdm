@@ -1,9 +1,8 @@
 import PropTypes from "prop-types";
-/* import { ActionsTable } from "./actionsTable"; */
 
 RowTableData.propTypes = {
   rowData: PropTypes.array.isRequired,
-  children: PropTypes.element.isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 function RowTableData(props) {

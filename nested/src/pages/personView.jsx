@@ -117,7 +117,7 @@ function PersonView() {
   };
 
   return (
-    <div className="flex flex-col items-center min-h-screen bg-white px-4 pb-4 sm:px-6 lg:px-8">
+    <div className="flex flex-col items-center min-h-screen bg-white px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl w-full space-y-6">
         <ArrowBackIcon root={"/menu"} />
         {/* Título y botón de agregar */}
@@ -180,35 +180,11 @@ function PersonView() {
         </div>
 
         {/* Tabla de resultados */}
-        <Table ArrayColumn={colum} ArrayRows={rows}>
-          {radioInputOn && (
-            <td className="px-4 py-2 whitespace-nowrap text-sm font-medium">
-              <button className="mr-2 text-primary hover:text-primary-dark">
-                Editar
-              </button>
-              |
-              <button className="mx-2 text-red-600 hover:text-red-800">
-                Eliminar
-              </button>
-              |
-              <button className="mx-2 text-blue-600 hover:text-red-800">
-                inscribir
-              </button>
-            </td>
-          )}
-
-          {!radioInputOn && (
-            <td className="px-4 py-2 whitespace-nowrap text-sm font-medium">
-              <button className="mr-2 text-primary hover:text-primary-dark">
-                Editar
-              </button>
-              |
-              <button className="mx-2 text-red-600 hover:text-red-800">
-                Eliminar
-              </button>
-            </td>
-          )}
-        </Table>
+        <Table
+          ArrayColumn={colum}
+          ArrayRows={rows}
+          tableType={"generic"}
+        ></Table>
       </div>
     </div>
   );

@@ -1,16 +1,16 @@
 import { useState } from "react";
 
 function useGlobal() {
-  const [loader, setLoader] = useState(true);
+  const [openModal, setOpenModal] = useState(false);
 
-  const handleLoader = () => {
-    setLoader(false);
+  const handleOpenModal = (action) => {
+    setOpenModal(action);
   };
 
   return [
     {
-      loader,
-      handleLoader,
+      openModal,
+      handleOpenModal,
     },
   ];
 }
