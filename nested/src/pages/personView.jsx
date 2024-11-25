@@ -1,7 +1,9 @@
-import { Link } from "react-router-dom";
-import { Table } from "../components/table";
+import { Link, useOutletContext } from "react-router-dom";
 import { useState } from "react";
 import { ArrowBackIcon } from "../components/arrowBackIcon";
+import { ColumnTableData } from "../components/columnTableData";
+import { RowTableData } from "../components/rowTableData";
+import { DeleteRegisterModal } from "../components/deleteRegisterModal";
 
 const columnDataInstructor = [
   "ID",
@@ -99,6 +101,9 @@ const rowDataStudent = [
 ];
 
 function PersonView() {
+  const { openModalDelete, handleOpenModalDelete, rowSelect, handleRowSelect } =
+    useOutletContext();
+
   const [colum, setColum] = useState(columnDataStudent);
   const [rows, setRows] = useState(rowDataStudent);
   const [radioInputOn, setRadioInputOn] = useState(true);
@@ -114,6 +119,12 @@ function PersonView() {
     setRadioInputOn(false);
     setColum(columnDataInstructor);
     setRows(rowDataInstructor);
+  };
+
+  /*Función para manejar apertura del modal de eliminación de registro */
+  const onClickDelete = (row) => {
+    handleOpenModalDelete(!openModalDelete);
+    handleRowSelect(row);
   };
 
   return (
@@ -180,11 +191,60 @@ function PersonView() {
         </div>
 
         {/* Tabla de resultados */}
-        <Table
-          ArrayColumn={colum}
-          ArrayRows={rows}
-          tableType={"generic"}
-        ></Table>
+        <div className="overflow-x-auto bg-white shadow-md">
+          <table className="min-w-full table-fixed border-collapse border border-slate-400 text-left">
+            <thead className="bg-gray-300 ">
+              <ColumnTableData columnData={colum} />
+            </thead>
+
+            <tbody className="divide-y divide-gray-300">
+              {rows.map((item, index) => (
+                <RowTableData rowData={item} key={index} rowNum={index}>
+                  <td className="px-4 py-2 whitespace-nowrap text-sm font-medium">
+                    {radioInputOn && (
+                      <>
+                        <button className="mr-2 text-primary hover:text-primary-dark">
+                          Editar
+                        </button>
+                        |
+                        <button
+                          className="mx-2 text-red-600 hover:text-red-800"
+                          onClick={() => onClickDelete(item)}
+                        >
+                          Eliminar
+                        </button>
+                        |
+                        <button className="mr-2 ml-2 text-cyan-600 hover:text-cyan-600">
+                          inscribir
+                        </button>
+                      </>
+                    )}
+                    {!radioInputOn && (
+                      <>
+                        <button className="mr-2 text-primary hover:text-primary-dark">
+                          Editar
+                        </button>
+                        |
+                        <button
+                          className="mx-2 text-red-600 hover:text-red-800"
+                          onClick={() => onClickDelete(item)}
+                        >
+                          Eliminar
+                        </button>
+                      </>
+                    )}
+                  </td>
+                </RowTableData>
+              ))}
+            </tbody>
+          </table>
+          {openModalDelete && (
+            <DeleteRegisterModal
+              row={rowSelect}
+              closeModal={handleOpenModalDelete}
+            />
+          )}
+        </div>
       </div>
     </div>
   );

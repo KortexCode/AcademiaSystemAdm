@@ -79,11 +79,7 @@ function AccountingView() {
         </Link>
         <SelectProgramCategory />
 
-        <Table
-          ArrayColumn={colum}
-          ArrayRows={rows}
-          tableType={"generics"}
-        ></Table>
+        <Table ArrayColumn={colum} ArrayRows={rows}></Table>
       </div>
     </div>
   );

@@ -56,11 +56,7 @@ function ProgramView() {
         <SelectProgramCategory />
 
         {/* Tabla de resultados */}
-        <Table
-          ArrayColumn={column}
-          ArrayRows={rows}
-          tableType="programs"
-        ></Table>
+        <Table ArrayColumn={column} ArrayRows={rows}></Table>
       </div>
     </div>
   );

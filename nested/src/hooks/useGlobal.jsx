@@ -1,16 +1,23 @@
 import { useState } from "react";
 
 function useGlobal() {
-  const [openModal, setOpenModal] = useState(false);
+  const [openModalDelete, setOpenModalDelete] = useState(false);
+  const [rowSelect, setRowSelect] = useState([]); //fila seleccionada según acción
 
-  const handleOpenModal = (action) => {
-    setOpenModal(action);
+  const handleOpenModalDelete = (action) => {
+    setOpenModalDelete(action);
+    /*  setRowSelect(row); */
+  };
+  const handleRowSelect = (row) => {
+    setRowSelect(row);
   };
 
   return [
     {
-      openModal,
-      handleOpenModal,
+      openModalDelete,
+      rowSelect,
+      handleOpenModalDelete,
+      handleRowSelect,
     },
   ];
 }

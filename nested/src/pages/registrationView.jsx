@@ -83,11 +83,7 @@ function RegistrationView() {
         </div>
 
         {/* Tabla de resultados */}
-        <Table
-          ArrayColumn={column}
-          ArrayRows={rows}
-          tableType={"generic"}
-        ></Table>
+        <Table ArrayColumn={column} ArrayRows={rows}></Table>
       </div>
     </div>
   );
