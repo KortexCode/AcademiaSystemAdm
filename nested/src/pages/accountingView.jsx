@@ -48,6 +48,10 @@ const rows = [
 ];
 
 function AccountingView() {
+  const dataTableType = {
+    type: "generic",
+    typeModal: "generic",
+  };
   return (
     <div className="flex flex-col items-center min-h-screen bg-white px-4 pb-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl w-full space-y-6">
@@ -79,7 +83,11 @@ function AccountingView() {
         </Link>
         <SelectProgramCategory />
 
-        <Table ArrayColumn={colum} ArrayRows={rows}></Table>
+        <Table
+          ArrayColumn={colum}
+          ArrayRows={rows}
+          tableType={dataTableType}
+        ></Table>
       </div>
     </div>
   );

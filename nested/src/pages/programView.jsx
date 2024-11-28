@@ -33,7 +33,11 @@ const rows = [
 ];
 
 function ProgramView() {
-  /* const [rows, setRows] = useState(rowDataProgram); */
+  //Determina el tipo de tabla, así genera los botones de acción para cada registro
+  const dataTableType = {
+    type: "generic",
+    typeModal: "program",
+  };
 
   return (
     <div className="flex flex-col items-center min-h-screen bg-white px-4 pb-4 sm:px-6 lg:px-8">
@@ -56,7 +60,11 @@ function ProgramView() {
         <SelectProgramCategory />
 
         {/* Tabla de resultados */}
-        <Table ArrayColumn={column} ArrayRows={rows}></Table>
+        <Table
+          ArrayColumn={column}
+          ArrayRows={rows}
+          tableType={dataTableType}
+        ></Table>
       </div>
     </div>
   );

@@ -32,6 +32,10 @@ const rows = [
 ];
 
 function RegistrationView() {
+  const dataTableType = {
+    type: "generic",
+    typeModal: "generic",
+  };
   return (
     <div className="flex flex-col items-center min-h-screen bg-white px-4 pb-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl w-full space-y-6">
@@ -83,7 +87,11 @@ function RegistrationView() {
         </div>
 
         {/* Tabla de resultados */}
-        <Table ArrayColumn={column} ArrayRows={rows}></Table>
+        <Table
+          ArrayColumn={column}
+          ArrayRows={rows}
+          tableType={dataTableType}
+        ></Table>
       </div>
     </div>
   );
