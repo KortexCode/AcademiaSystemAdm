@@ -3,6 +3,7 @@ import { ArrowBackIcon } from "../components/arrowBackIcon";
 import { SelectProgramCategory } from "../components/selectProgramCategory";
 
 const column = [
+  "ID",
   "Nombre",
   "Apellido",
   "Programa",
@@ -14,6 +15,7 @@ const column = [
 
 const rows = [
   [
+    "107834934",
     "Jhoana",
     "Galindo",
     "Formación",
@@ -22,6 +24,7 @@ const rows = [
     "Donal Trump",
   ],
   [
+    "107834934",
     "Jhoana",
     "Galindo",
     "Formación",

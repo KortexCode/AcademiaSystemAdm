@@ -24,7 +24,7 @@ const columnDataInstructor = [
 
 const rowDataInstructor = [
   [
-    "1233",
+    "104872344",
     "Donald",
     "Trump",
     "70",
@@ -63,7 +63,7 @@ const columnDataStudent = [
 
 const rowDataStudent = [
   [
-    "1223",
+    "1053922004",
     "Jhoana",
     "Galindo",
     "20",
@@ -80,7 +80,7 @@ const rowDataStudent = [
     "05/11/2024",
   ],
   [
-    "1223",
+    "1064923003",
     "Luzdeluna",
     "Cortés",
     "12",

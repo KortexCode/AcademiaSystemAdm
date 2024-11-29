@@ -4,6 +4,7 @@ import { Table } from "../components/table";
 import { SelectProgramCategory } from "../components/selectProgramCategory";
 
 const colum = [
+  "ID",
   "Nombre",
   "Apellido",
   "Fecha de pago",
@@ -20,6 +21,7 @@ const colum = [
 
 const rows = [
   [
+    "123",
     "Jhoana",
     "Galindo",
     "20/11/2024",
@@ -33,6 +35,7 @@ const rows = [
     "60.000",
   ],
   [
+    "105482392",
     "Luzdeluna",
     "Cortés",
     "20/11/2024",

@@ -12,27 +12,31 @@ function DeleteRegisterModal(props) {
   //Tipo de tabla
   const { tableType } = props;
   return createPortal(
-    <div className="flex items-center justify-center w-screen h-screen fixed top-0 bottom-0 left-0 right-0">
-      <div className="flex flex-col justify-between w-[400px] h-auto p-4 rounded-lg border-2 border-solid border-primary bg-white z-10 space-y-4">
+    <div className="flex items-center justify-center min-w-screen min-h-screen fixed top-0 bottom-0 left-0 right-0">
+      <div className="flex flex-col justify-between w-[400px]  p-4 rounded-lg border-2 border-solid border-primary bg-white z-10 space-y-4">
         <p className="font-bold text-xl text-center ">
           ¿Seguro que deseas eliminar este registro?
         </p>
         <div className="w-full h-auto font-medium p-1 bg-gray-200 rounded-lg text-center">
           {tableType === "generic" && (
             <>
-              <span className="mr-2">
-                Nombre: <span className="font-normal">{rowSelect[0]}</span>
-              </span>
-              <span className="font-normal">{rowSelect[1]}</span>
-              <p>
-                Programa: <span className="font-normal">{rowSelect[2]}</span>{" "}
+              <p className="mr-2">
+                Cédula: <span className="font-normal">{rowSelect[0]}</span>
               </p>
+              <span>
+                Nombre: <span className="font-normal">{rowSelect[1]}</span>{" "}
+                <span className="font-normal">{rowSelect[2]}</span>
+              </span>
             </>
           )}
           {tableType === "program" && (
             <>
-              <span className="mr-2">Nombre: {rowSelect[0]}</span>
-              <span>Categoría: {rowSelect[2]}</span>
+              <p className="mr-2">
+                Nombre: <span className="font-normal">{rowSelect[0]}</span>
+              </p>
+              <p>
+                Categoría: <span className="font-normal">{rowSelect[2]}</span>
+              </p>
             </>
           )}
         </div>
