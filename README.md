@@ -1,33 +1,23 @@
 # Academia_Web_Site
 
-This project is an online manga store built with React in which through the user interface you can see and consult the information of different manga, online sales are also emulated. [Learning project]
+Dance Academy web site, made with React.
 
 ## Applied Concepts
 
 - Single Page Applications(SPA)
-- Api Rest
 
 ## Frontend Width Javascript
 
 - React
-- React Router Dom v5
-- TyperScript
+- React Router Dom v6
 
 ## CSS Tools
 
-- SASS
+- Tailwind
 
 ## Configuration Tools
 
-- Webpack
-- Eslint
-- Prettier
-- Husky
-
-## API
-
-You can consult the site where the API was used.
-Here [Link to Jikan Anime Api ](https://docs.api.jikan.moe/)
+- VITE
 
 ## Available Scripts
 
@@ -37,16 +27,14 @@ In the project directory, you can run:
 
 Run npm install to download all files and packages
 
-### `npm run start`
+### `npm run dev`
 
 Runs the app in the development mode
-
-port http://localhost:9000/
 
 ### `npm run build`
 
 Builds the app for production to the `dist` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
+The build is minified.
 Your app is ready to be deployed!
