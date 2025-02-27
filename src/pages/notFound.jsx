@@ -1,13 +1,12 @@
-import { Header } from "../components/header"
+function NotFound() {
 
-function NotFound () {
+  return (
     
-    return (
-        <>
-        <Header/>
-        <h2 className="pt-20">NO ES LA PÁGINA QUE BUSCAS</h2>
-        </>
-    )
+      <section>
+        <h2>La página que buscas no está en esta dirección, debes buscar en otra</h2>
+      </section>  
+       
+  )
 }
 
-export {NotFound}
+export {NotFound};

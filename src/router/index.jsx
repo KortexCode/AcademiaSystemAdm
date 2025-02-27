@@ -1,26 +1,38 @@
-import { createHashRouter, createRoutesFromElements, Route } from "react-router-dom";
-import { Layout } from "../layout/Layout";
+import {
+  createHashRouter,
+  createRoutesFromElements,
+  Route,
+} from "react-router-dom";
+import { Layout } from "../layout/index";
 import { HomePage } from "../pages/homePage";
+import { MenuView } from "../pages/menuView";
+import { PersonView } from "../pages/personView";
 import { NotFound } from "../pages/notFound";
-import { AboutUs } from "../pages/aboutUs";
-import { TrainingProgram } from "../pages/trainingProgram";
-import { PersonalizedProgram } from "../pages/personalizedProgram";
-import { SemiPersonalizedProgram } from "../pages/semiPersonalizedProgram";
-import { TherapyDanceProgram } from "../pages/therapyDanceProgram";
-import { Performance } from "../pages/performance";
+import { AddPersonView } from "../pages/addPersonView";
+import { ProgramView } from "../pages/programView";
+import { RegistrationView } from "../pages/registrationView";
+import { AccountingView } from "../pages/accountingView";
+import { AddAccountingView } from "../pages/addAccountingView";
 
 const router = createHashRouter(
-    createRoutesFromElements(
-        <Route path="/" element={<Layout />} errorElement={<NotFound/>}>
-             <Route index={true} path="/" element={<HomePage />} />
-             <Route path="/sobre-nosotros" element={<AboutUs />} />
-             <Route path="/formacion" element={<TrainingProgram />} />
-             <Route path="/personalizado" element={<PersonalizedProgram />} />
-             <Route path="/semi-personalizado" element={<SemiPersonalizedProgram />} />
-             <Route path="/bailo-terapia" element={<TherapyDanceProgram />} />
-             <Route path="/presentaciones" element={<Performance />} />
-        </Route>      
-    )
-)
+  createRoutesFromElements(
+    <Route path="/" element={<Layout />} errorElement={<NotFound />}>
+      <Route index={true} path="/" element={<HomePage />} />
+      <Route path="/menu" element={<MenuView />} />
+      <Route path="/menu/personas" element={<PersonView />} />
+      <Route
+        path="/menu/personas/agregar-personas"
+        element={<AddPersonView />}
+      />
+      <Route path="/menu/programas" element={<ProgramView />} />
+      <Route path="/menu/inscripcion" element={<RegistrationView />} />
+      <Route path="/menu/contabilidad" element={<AccountingView />} />
+      <Route
+        path="/menu/contabilidad/agregar-contabilidad"
+        element={<AddAccountingView />}
+      />
+    </Route>
+  )
+);
 
-export {router}
+export { router };

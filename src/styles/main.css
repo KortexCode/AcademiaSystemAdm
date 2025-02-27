@@ -2,29 +2,3 @@
 @tailwind components;
 @tailwind utilities;
 
-
-.basicTextFooter {
-    @apply font-semibold text-white;
-}
-.titleTextFooter {
-  @apply pb-2 text-lg font-bold text-orange-500 text-center;
-}
-
-
-#menu-mobile:hover {
-    color: #c2410c;
-    fill: #c2410c;
-    stroke: black;
-}
-
-.section-post-front-page {
-    margin: 0 auto;
-}
-
-.performance {
-
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 350px));
-  justify-content: center;
-  gap: 16px;
-}
