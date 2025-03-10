@@ -4,7 +4,7 @@ import {
   Route,
 } from "react-router-dom";
 import { Layout } from "../layout/index";
-import { HomePage } from "../pages/homePage";
+import { LoginPage } from "../pages/loginView";
 import { MenuView } from "../pages/menuView";
 import { PersonView } from "../pages/personView";
 import { NotFound } from "../pages/notFound";
@@ -17,7 +17,7 @@ import { AddAccountingView } from "../pages/addAccountingView";
 const router = createHashRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout />} errorElement={<NotFound />}>
-      <Route index={true} path="/" element={<HomePage />} />
+      <Route index={true} path="/" element={<LoginPage />} />
       <Route path="/menu" element={<MenuView />} />
       <Route path="/menu/personas" element={<PersonView />} />
       <Route

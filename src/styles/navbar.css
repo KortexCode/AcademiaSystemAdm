@@ -1,0 +1,25 @@
+
+
+.buttons-navbar li a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 4px;
+    margin-left: 12px;
+    text-decoration: none;
+    
+}
+.buttons-navbar li a:hover {
+    color: white;
+    
+}
+.buttons-navbar li p { 
+    margin-bottom: 0;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.buttons-navbar svg{
+    font-size: 24px;
+    font-weight: 600;
+}

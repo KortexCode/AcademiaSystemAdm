@@ -1,0 +1,29 @@
+.table-container {
+    box-shadow: 3px 3px 4px black;
+    border: none;
+}
+.profile-view {
+    box-shadow: 3px 3px 4px black;
+    border: none;
+    border-radius: 8px;
+}
+.profile-view p{
+    padding: 4px 8px 4px 8px;
+    border-radius: 8px;
+    
+}
+.btn-menu-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 150px));
+    justify-content: center;
+    gap: 16px;
+}
+
+.grafica-contable-container {
+    box-shadow: 3px 3px 4px black;
+    border: none;
+}
+.grafica-matricula-container {
+    box-shadow: 3px 3px 4px black;
+    border: none;
+}

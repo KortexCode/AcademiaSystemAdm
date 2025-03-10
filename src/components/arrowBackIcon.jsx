@@ -13,7 +13,7 @@ function ArrowBackIcon(props) {
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
-        className="size-6 stroke-[3px] stroke-primary hover:stroke-black"
+        className="size-6 stroke-[3px] stroke-black hover:stroke-white"
       >
         <path
           strokeLinecap="round"

@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
-function HomePage() {
+function LoginPage() {
   const navigate = useNavigate();
   /* Lógica para inicio de sesión */
   const handleSession = () => {
@@ -79,4 +79,4 @@ function HomePage() {
   );
 }
 
-export { HomePage };
+export { LoginPage };

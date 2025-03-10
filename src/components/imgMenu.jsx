@@ -27,7 +27,7 @@ function ImgMenu(props) {
 
       {/* Imagen principal */}
       <img
-        className={`w-full h-36 ${isLoaded ? "hidden" : "block"}`}
+        className={`w-full h-36 rounded-lg ${isLoaded ? "hidden" : "block"}`}
         src={url}
         alt={alt}
         onLoad={handleImageLoad}
