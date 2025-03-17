@@ -4,9 +4,8 @@ import programsImg from "../assets/programs_1.jpg";
 import accountingImg from "../assets/accounting_1.jpg";
 import { Link } from "react-router-dom";
 import { ImgMenu } from "../components/imgMenu";
-import female_avatar from "../assets/female_avatar.png";
+/* import female_avatar from "../assets/female_avatar.png"; */
 import { HiOutlineTable } from "react-icons/hi";
-import graph from "../assets/graph.png";
 import "../styles/menu.css";
 
 function MenuView() {
@@ -23,7 +22,7 @@ function MenuView() {
       </div>
       {/* PERFIL */}
       <div className="grid grid-cols-1 lg:grid-cols-[250px_1fr_1fr] w-[90%] gap-4 mt-6 mx-aut ">
-        <div className="profile-view w-60 lg:col-span-1 md:mt-0 mx-auto md:mx-0 mb-3 lg:mb-0 flex flex-col items-center md:justify-self-center rounded-lg overflow-hidden">
+        {/* <div className="profile-view w-60 lg:col-span-1 md:mt-0 mx-auto md:mx-0 mb-3 lg:mb-0 flex flex-col items-center md:justify-self-center rounded-lg overflow-hidden">
           <div className="w-full h-full">
             <img
               className="w-full object-fill"
@@ -37,7 +36,7 @@ function MenuView() {
               Luzdelua Cortés
             </p>
           </div>
-        </div>
+        </div> */}
         {/* TABLAS */}
         <div className="table-container flex-col md:w-full lg:h-full lg:col-span-2 mb-3 lg:mb-0 rounded-2xl shadow-gray-800 overflow-hidden bg-neutral-800">
           <div className="w-full flex items-center justify-center bg-primary p-3">
@@ -84,35 +83,6 @@ function MenuView() {
                 </button>
               </Link>
             </div>
-          </div>
-        </div>
-      </div>
-      {/* GRAFICAS */}
-      <div className="w-[90%] flex flex-col lg:flex-row gap-3 mt-3">
-        <div className="grafica-contable-container w-full mt-4 mb-4 mx-auto rounded-lg  overflow-hidden bg-neutral-800">
-          <div className="w-full flex items-center justify-center bg-primary p-3">
-            <p className="me-3 text-2xl font-bold">Gráfica de servicios</p>{" "}
-            <HiOutlineTable size={40} />
-          </div>
-          <div className="w-full h-auto flex justify-center">
-            <img
-              className="w-full object-fill"
-              src={graph}
-              alt="Gráfica contable"
-            />
-          </div>
-        </div>
-        <div className="grafica-matricula-container w-full mt-4 mb-4 mx-auto rounded-lg  overflow-hidden bg-neutral-800">
-          <div className="w-full flex items-center justify-center bg-primary p-3">
-            <p className="me-3 text-2xl font-bold">Gráfica de matrículas</p>{" "}
-            <HiOutlineTable size={40} />
-          </div>
-          <div className="w-full h-auto flex justify-center">
-            <img
-              className="w-full object-fill"
-              src={graph}
-              alt="Gráfica contable"
-            />
           </div>
         </div>
       </div>

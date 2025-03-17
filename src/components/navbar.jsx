@@ -9,7 +9,40 @@ function Navbar() {
   return (
     <>
       <header className="z-10">
-        <nav className="fixed flex justify-end items-center w-full h-14 border-b-2 border-b-stone-400 shadow-lg  bg-primary z-10">
+        <nav className="fixed flex justify-between items-center w-full h-14 border-b-2 border-b-black shadow-lg  bg-primary z-10">
+          <div>
+            <img src="" alt="Logo" />
+          </div>
+          <ul className="flex">
+            <li className="mx-2">
+              <NavLink
+                to={"/menu/personas"}
+                className={`${navigatActived} flex justify-center items-center`}
+              >
+                <p className="me-1 text-1">Personas</p>
+                <HiHome className={navigatActived && "stroke-black stroke-1"} />
+              </NavLink>
+            </li>
+            <li className="mx-2">
+              <NavLink
+                to={"/menu/matricula"}
+                className={`${navigatActived} flex justify-center items-center`}
+              >
+                <p className="me-1 text-1">Matrículas</p>
+                <HiHome className={navigatActived && "stroke-black stroke-1"} />
+              </NavLink>
+            </li>
+            <li className="mx-2">
+              <NavLink
+                to={"/menu/contabilidad"}
+                className={`${navigatActived} flex justify-center items-center`}
+              >
+                <p className="me-1 text-1">Contabilidad</p>
+                <HiHome className={navigatActived && "stroke-black stroke-1"} />
+              </NavLink>
+            </li>
+          </ul>
+
           <ul className="flex me-4 buttons-navbar">
             <li>
               <NavLink to={"/menu"} className={navigatActived}>

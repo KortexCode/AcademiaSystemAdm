@@ -25,7 +25,7 @@ const router = createHashRouter(
         element={<AddPersonView />}
       />
       <Route path="/menu/programas" element={<ProgramView />} />
-      <Route path="/menu/inscripcion" element={<RegistrationView />} />
+      <Route path="/menu/matricula" element={<RegistrationView />} />
       <Route path="/menu/contabilidad" element={<AccountingView />} />
       <Route
         path="/menu/contabilidad/agregar-contabilidad"

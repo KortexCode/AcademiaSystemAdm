@@ -1,71 +1,35 @@
+import { useEffect, useState, useRef } from "react";
+import { useAprendizService } from "../service/useAprendizService";
+import { useProfesorService } from "../service/useProfesorService";
+import { usePersonService } from "../service/usePersonService";
 import { Link } from "react-router-dom";
-import { DataGridReact } from "../components/tableGrid";
-/* import { ArrowBackIcon } from "../components/arrowBackIcon"; */
-/* import { Table } from "../components/table"; */
-import { HiArrowLeft } from "react-icons/hi";
+import { TableData } from "../components/tableData";
+import {
+  columsPerson,
+  columnsAprendiz,
+  columnsProfesor,
+} from "../util/personColums.js";
+import { FaTable } from "react-icons/fa6";
 import "../styles/personView.css";
 
-/* const columnDataInstructor = [
-  "ID",
-  "Nombre",
-  "Apellido",
-  "Edad",
-  "Sexo",
-  "Dirección",
-  "Teléfono",
-  "Correo",
-  "Seguridad Social",
-  "Patología",
-  "Perfil",
-  "Profesion",
-  "Disponibilidad",
-  "Horas",
-  "Fecha de registro",
-  "Acciones",
-];
- */
-
-/* const columnDataStudent = [
-  "ID",
-  "Nombre",
-  "Apellido",
-  "Edad",
-  "Sexo",
-  "Dirección",
-  "Teléfono",
-  "Correo",
-  "Seguridad Social",
-  "Patología",
-  "Acudiente Nombre",
-  "Acudiente Apellido",
-  "Teléfono Acudiente",
-  "Teléfono Acudiente Alt",
-  "Ocupación",
-  "Estado",
-  "Fecha de registro",
-  "Acciones",
-]; */
-/* const columnDataStudent = [
-  "ID",
-  "Nombre",
-  "Apellido",
-  "Edad",
-  "Sexo",
-  "Dirección",
-  "Teléfono",
-  "Correo",
-  "Seguridad Social",
-  "Patología",
-  "Fecha de registro",
-  "Acciones",
-]; */
-
 function PersonView() {
-  /*   const [column, setColum] = useState(columnDataStudent); */
-  /*   const [radioInputOn, setRadioInputOn] = useState(true); */
+  //Servicios
+  const { getAprendices } = useAprendizService();
+  const { getProfesores } = useProfesorService();
+  const { getPersonas } = usePersonService();
+  //Estados
+  const [rows, setRows] = useState([]);
+  const [column, setColum] = useState([]);
+
+  const [radioInputStundent, setRadioInputStudent] = useState(false);
+  const [radioInputInstructor, setRadioInputInstructor] = useState(false);
+
+  //Referencias
+  let rowStudentRef = useRef([]);
+  let rowInstructorRef = useRef([]);
 
   //Determina el tipo de tabla, así genera los botones de acción para cada registro
-  /*   const dataTableType = radioInputOn
+  /*  const dataTableType = radioInputOn
     ? {
         type: "student",
         typeModal: "generic",
@@ -75,72 +39,92 @@ function PersonView() {
         typeModal: "generic",
       }; */
 
-  /*  const handleShowStundents = () => {
-    if (radioInputOn === false) {
-      setRadioInputOn(true);
-      setColum(columnDataStudent);
-      setRows(rowDataStudent);
-    }
+  const handleShowStundents = () => {
+    console.log("pidiendo estudiante");
+    setColum(columnsAprendiz);
+    setRows(rowStudentRef.current);
+    setRadioInputStudent(true);
+    setRadioInputInstructor(false);
   };
   const handleShowInstructors = () => {
-    setRadioInputOn(false);
-    setColum(columnDataInstructor);
-    setRows(rowDataInstructor);
-  }; */
+    console.log("pidiendo profesores");
+    setColum(columnsProfesor);
+    setRows(rowInstructorRef.current);
+    setRadioInputInstructor(true);
+    setRadioInputStudent(false);
+  };
+
+  useEffect(() => {
+    async function fetchData() {
+      const resPersonas = await getPersonas();
+      setColum(columsPerson);
+      setRows(resPersonas);
+
+      const resStundent = await getAprendices();
+      rowStudentRef.current = resStundent;
+      console.log("aprendices effec", rowStudentRef.current);
+
+      const resInstructor = await getProfesores();
+      rowInstructorRef.current = resInstructor;
+      console.log("profesores en personview", rowInstructorRef.current);
+    }
+    fetchData();
+  }, []);
 
   return (
-    <div className="w-[90%] my-0 mx-auto pt-20 bg-white z-0">
-      <div className="w-full flex relative items-center justify-center rounded-t-lg p-2 bg-primary">
-        {/* <ArrowBackIcon root={"/menu"} /> */}
-        <Link to={"/menu"} className="absolute left-3">
-          <HiArrowLeft size={32} scale={10} stroke="black" />
-        </Link>
-        <h1 className="text-3xl font-extrabold text-gray-900 text-center m-0">
-          Módulo de personas
-        </h1>
+    <div className="w-[100%] pt-[56px]">
+      <div className="w-full flex items-center justify-center  p-2 bg-primary text-gray-900">
+        <h3 className="me-2 text-2xl font-extrabold  text-center">
+          Tabla Personas
+        </h3>
+        <FaTable size={22} className="mt-1" />
       </div>
-      <div className="container-view w-full px-3 border-2 mb-3 border-t-0 shadow-lg bg-neutral-900">
+      <div className="container-view w-full px-3 border-2 mb-3 border-t-0 shadow-lg ">
         {/*filtros */}
-        <div className="search-view flex flex-col w-64 mt-4 p-4 border-2 rounded-lg shadow-lg bg-white">
-          <p className="text-base font-medium">Filtros por categorías</p>
-          <div className="w-full flex flex-col space-x-y">
-            <label className="inline-flex items-center py-2">
-              <input
-                type="checkbox"
-                className="text-primary focus:ring-primary"
-              />
-              <span className="ml-2 text-gray-700">Activos</span>
-            </label>
-            <label className="inline-flex items-center py-2">
-              <input
-                type="checkbox"
-                className="text-primary focus:ring-primary"
-              />
-              <span className="ml-2 text-gray-700">Inactivos</span>
-            </label>
-          </div>
-          <div className="w-full flex-col space-x-y">
-            <div className="flex items-center justify-start py-2">
-              <div>
+        <div className="filter-container w-full flex mt-6 mb-4 space-x-2">
+          <div className="flex justify-center w-40 p-4 border-2 rounded-lg shadow-lg bg-white">
+            <div className="w-full flex flex-col space-x-y">
+              <label className="inline-flex items-center py-2">
                 <input
                   type="checkbox"
-                  /* checked={radioInputOn} */
-                  /* onChange={handleShowStundents} */
+                  className="text-primary focus:ring-primary"
                 />
-              </div>
-
-              <span id="checkStudent" className="ml-2 text-gray-700">
-                Estudiantes
-              </span>
+                <span className="ml-2 text-gray-700">Activos</span>
+              </label>
+              <label className="inline-flex items-center py-2">
+                <input
+                  type="checkbox"
+                  className="text-primary focus:ring-primary"
+                />
+                <span className="ml-2 text-gray-700">Inactivos</span>
+              </label>
             </div>
-            <div className="flex items-center justify-start py-2">
-              <input
-                id="checkInstructor"
-                type="checkbox"
-                /*   checked={!radioInputOn} */
-                /*   onChange={handleShowInstructors} */
-              />
-              <span className="ml-2 text-gray-700">Instructores</span>
+          </div>
+
+          <div className="flex w-40 p-4 border-2 rounded-lg shadow-lg bg-white">
+            <div className="w-full flex-col space-x-y">
+              <div className="flex items-center justify-start py-2">
+                <div>
+                  <input
+                    type="checkbox"
+                    checked={radioInputStundent}
+                    onChange={handleShowStundents}
+                  />
+                </div>
+
+                <span id="checkStudent" className="ml-2 text-gray-700">
+                  Estudiantes
+                </span>
+              </div>
+              <div className="flex items-center justify-start py-2">
+                <input
+                  id="checkInstructor"
+                  type="checkbox"
+                  checked={radioInputInstructor}
+                  onChange={handleShowInstructors}
+                />
+                <span className="ml-2 text-gray-700">Instructores</span>
+              </div>
             </div>
           </div>
         </div>
@@ -166,12 +150,7 @@ function PersonView() {
           </div>
           {/* Tabla de resultados */}
           <div className="w-full mt-3">
-            <DataGridReact />
-            {/* <Table
-              ArrayColumn={column}
-              ArrayRows={rows}
-              tableType={dataTableType}
-            ></Table> */}
+            <TableData columns={column} rows={rows} />
           </div>
         </div>
       </div>

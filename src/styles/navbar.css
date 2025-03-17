@@ -15,6 +15,7 @@
 }
 .buttons-navbar li p { 
     margin-bottom: 0;
+    margin-right: 4px;
     font-size: 18px;
     font-weight: 600;
 }
