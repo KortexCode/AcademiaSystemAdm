@@ -3,15 +3,11 @@ import { axiosInstance } from "../util/axios.util";
 export function useAprendizService() {
   const getAprendices = async () => {
     try {
-      console.log("consultando aprendices");
-
       const response = await axiosInstance.get("aprendiz/consulta/aprendices");
-      console.log("respuesta", response.data);
       const { data, message, status } = response.data;
       if (status === true) {
-        console.log("datos de la tabla", data);
-        console.log("mensaje", message);
-        const rowObject = data.map((item) => {
+    
+        const rowObject = data.map((item:any) => {
           item.id = item.id_aprendiz;
           delete item.id_aprendiz;
           const personaArray = item.persona;

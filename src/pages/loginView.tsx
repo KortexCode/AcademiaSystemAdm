@@ -1,27 +1,36 @@
-import { useNavigate } from "react-router-dom";
+import { useLoginService } from "../service/useLoginService";
 
+import logo from "../assets/logoAca.png";
 function LoginPage() {
-  const navigate = useNavigate();
+  const {postLoginInit} = useLoginService();
+  
   /* Lógica para inicio de sesión */
   const handleSession = () => {
-    const form = document.getElementById("formSession");
+    const form: any = document.getElementById("formSession");
     const formData = new FormData(form);
     const dataForm = Object.fromEntries(formData.entries());
-
+    console.log(typeof dataForm.user)
     if (dataForm.user === "" || dataForm.password === "") {
       alert("Debes llenar los campos vacios para iniciar sesión");
     } else {
-      navigate("./menu");
+    
+      const userInfo = {
+        user_name: "1053822008",
+        password: "123"
+      }
+      postLoginInit(userInfo);
     }
   };
+
+
   return (
     <>
       <section className="w-full h-full bg-bdBackground">
         <div className="flex flex-col items-center justify-center md:w-[480px] my-0 mx-auto h-full min-h-screen bg-white px-4 sm:px-6 lg:px-8">
           <div className="max-w-md w-full space-y-8">
-            <h1 className="text-center text-3xl font-extrabold text-zinc-900">
-              Academia DB
-            </h1>
+            <div className="w-full flex justify-center">
+              <img className="w-52" src={logo} alt="logo academia" />
+            </div>
             <form id="formSession" className="mt-8 space-y-6">
               <div className="rounded-md shadow-sm -space-y-px">
                 <div className="mb-4">
@@ -65,6 +74,7 @@ function LoginPage() {
 
               <div>
                 <button
+                type="button"
                   className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-lg font-semibold rounded-md text-zinc-900 bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
                   onClick={handleSession}
                 >

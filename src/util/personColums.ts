@@ -1,4 +1,4 @@
-const columsPerson = [
+const columsPerson:any = [
   { field: "id", headerName: "ID", width: 70 },
   { field: "nombre", headerName: "Nombres", width: 130 },
   { field: "apellido", headerName: "Apellidos", width: 130 },
@@ -16,7 +16,7 @@ const columsPerson = [
   { field: "patologia", headerName: "Patología", width: 130 },
 ];
 
-const columnsProfesor = [
+const columnsProfesor:any = [
   { field: "id", headerName: "ID", width: 70 },
   { field: "estado", headerName: "estado", width: 130 },
   { field: "nombre", headerName: "Nombres", width: 130 },
@@ -43,7 +43,7 @@ const columnsProfesor = [
   { field: "horas_disponibles", headerName: "Horas", width: 130 },
 ];
 
-const columnsAprendiz = [
+const columnsAprendiz:any = [
   { field: "id", headerName: "ID", width: 70 },
   { field: "estado", headerName: "estado", width: 130 },
   { field: "nombre", headerName: "Nombres", width: 130 },

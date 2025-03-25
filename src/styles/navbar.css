@@ -1,4 +1,6 @@
-
+.navbar {
+    box-shadow: 2px 2px 4px #56a02f;
+}
 
 .buttons-navbar li a {
     display: flex;

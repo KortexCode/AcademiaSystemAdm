@@ -10,7 +10,7 @@ export function useProfesorService() {
         return;
       }
       //Creamos una nueva propiedad id para el objeto por condición de la tabla de rect material
-      const rowObject = profesoresList.map((profesores) => {
+      const rowObject = profesoresList.map((profesores:any) => {
         profesores.id = profesores.id_profesor;
         delete profesores.id_profesor;
 

@@ -1,15 +1,14 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
-    "./nested/src/**/*.{html,jsx,js,tsx}",
     "./src/**/*.{js,ts,jsx,tsx,html}",
   ],
   theme: {
     extend: {
       colors: {
         bdBackground: "#11100E",
-        primary: "#FFAF02",
-        "primary-dark": "#e09b00",
+        primary: "#83ED49",
+        "primary-dark": "#56a02f",
         "primary-color": "#FF822F",
         "secondary-color": "#B9DA13",
         textBody: "#302D2D",

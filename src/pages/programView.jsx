@@ -1,44 +1,12 @@
-import { Table } from "../components/table";
+
 import { ArrowBackIcon } from "../components/arrowBackIcon";
 import { SelectProgramCategory } from "../components/selectProgramCategory";
 /* import { useState } from "react"; */
 
-const column = [
-  "Nombre",
-  "Descripción",
-  "Categoría",
-  "Fecha de registro",
-  "Acciones",
-];
 
-const rows = [
-  [
-    "Formación",
-    "Se enseña a niños de 4 a 11 años las danzas folclóricas y ritmos",
-    "Infantil",
-    "05/11/2024",
-  ],
-  [
-    "Formación",
-    "Se enseña a niños de 12 a 18 años las danzas folclóricas y ritmos",
-    "Juvenil",
-    "05/11/2024",
-  ],
-  [
-    "Bailo Terapia",
-    "Ejercitar con bailes al usuario en diferentes ritmos",
-    "No Aplica",
-    "05/11/2024",
-  ],
-];
 
 function ProgramView() {
-  //Determina el tipo de tabla, así genera los botones de acción para cada registro
-  const dataTableType = {
-    type: "generic",
-    typeModal: "program",
-  };
-
+ 
   return (
     <div className="flex flex-col items-center min-h-screen bg-white px-4 pb-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl w-full space-y-7">
@@ -60,11 +28,7 @@ function ProgramView() {
         <SelectProgramCategory />
 
         {/* Tabla de resultados */}
-        <Table
-          ArrayColumn={column}
-          ArrayRows={rows}
-          tableType={dataTableType}
-        ></Table>
+       
       </div>
     </div>
   );

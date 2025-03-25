@@ -1,44 +1,10 @@
-import { Table } from "../components/table";
+
 import { ArrowBackIcon } from "../components/arrowBackIcon";
 import { SelectProgramCategory } from "../components/selectProgramCategory";
 
-const column = [
-  "ID",
-  "Nombre",
-  "Apellido",
-  "Programa",
-  "Categoría",
-  "Horario",
-  "Instructor",
-  "Acciones",
-];
-
-const rows = [
-  [
-    "107834934",
-    "Jhoana",
-    "Galindo",
-    "Formación",
-    "Juvenil",
-    "Jueves 5pm - 7pm",
-    "Donal Trump",
-  ],
-  [
-    "107834934",
-    "Jhoana",
-    "Galindo",
-    "Formación",
-    "Juvenil",
-    "Jueves 5pm - 7pm",
-    "Donal Trump",
-  ],
-];
 
 function RegistrationView() {
-  const dataTableType = {
-    type: "generic",
-    typeModal: "generic",
-  };
+ 
   return (
     <div className="flex flex-col items-center min-h-screen bg-white px-4 pb-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl w-full space-y-6">
@@ -89,12 +55,6 @@ function RegistrationView() {
           </select>
         </div>
 
-        {/* Tabla de resultados */}
-        <Table
-          ArrayColumn={column}
-          ArrayRows={rows}
-          tableType={dataTableType}
-        ></Table>
       </div>
     </div>
   );

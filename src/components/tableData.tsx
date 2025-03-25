@@ -2,14 +2,9 @@ import { Paper } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import PropTypes from "prop-types";
 
-TableData.propTypes = {
-  columns: PropTypes.array.isRequired,
-  rows: PropTypes.array.isRequired,
-};
-
 const paginationModel = { page: 0, pageSize: 5 };
 
-export function TableData(props) {
+export function TableData(props:any) {
   const { rows, columns } = props;
 
   return (

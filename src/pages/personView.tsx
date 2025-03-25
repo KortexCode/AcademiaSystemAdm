@@ -8,7 +8,7 @@ import {
   columsPerson,
   columnsAprendiz,
   columnsProfesor,
-} from "../util/personColums.js";
+} from "../util/personColums";
 import { FaTable } from "react-icons/fa6";
 import "../styles/personView.css";
 

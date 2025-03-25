@@ -2,6 +2,7 @@ import { HiUser } from "react-icons/hi";
 import { HiHome } from "react-icons/hi";
 import "../styles/navbar.css";
 import { NavLink } from "react-router-dom";
+import logo from "../assets/logoAca.png";
 
 function Navbar() {
   const navigatActived = ({ isActive }) =>
@@ -9,9 +10,9 @@ function Navbar() {
   return (
     <>
       <header className="z-10">
-        <nav className="fixed flex justify-between items-center w-full h-14 border-b-2 border-b-black shadow-lg  bg-primary z-10">
+        <nav className="navbar fixed flex justify-between items-center w-full h-14  bg-primary z-10">
           <div>
-            <img src="" alt="Logo" />
+            <img src={logo} alt="Logo" className="w-[55px]"/>
           </div>
           <ul className="flex">
             <li className="mx-2">
