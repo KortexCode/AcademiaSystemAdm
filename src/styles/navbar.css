@@ -9,10 +9,11 @@
     margin-right: 4px;
     margin-left: 12px;
     text-decoration: none;
+
     
 }
 .buttons-navbar li a:hover {
-    color: white;
+  /*   color: white; */
     
 }
 .buttons-navbar li p { 
@@ -20,9 +21,10 @@
     margin-right: 4px;
     font-size: 18px;
     font-weight: 600;
+   /*  color: rgb(255, 255, 255); */
 }
 
-.buttons-navbar svg{
+/* .buttons-navbar svg{
     font-size: 24px;
     font-weight: 600;
-}
+} */

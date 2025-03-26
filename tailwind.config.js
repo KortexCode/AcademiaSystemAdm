@@ -6,9 +6,11 @@ export default {
   theme: {
     extend: {
       colors: {
-        bdBackground: "#11100E",
+        "background": "#222121",
+        "background-card": "#797878",
         primary: "#83ED49",
         "primary-dark": "#56a02f",
+        "text-primary-dark": "#2f4858",
         "primary-color": "#FF822F",
         "secondary-color": "#B9DA13",
         textBody: "#302D2D",

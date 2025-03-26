@@ -7,3 +7,18 @@
     }
 }
 
+.required-span {
+    @apply ms-1 text-sm text-red-500 font-medium opacity-0 transition duration-[.5s] ease-in-out;
+}
+
+.span--actived {
+    @apply opacity-100
+}
+
+.link-li {
+    @apply flex items-center p-1  space-x-1 text-text-primary-dark cursor-pointer
+}
+.link-li:hover {
+    @apply  p-1 rounded-md  bg-[#4fbd0b]
+}
+
