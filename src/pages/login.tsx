@@ -49,7 +49,7 @@ function LoginPage() {
                     className="appearance-none relative block w-full px-3 py-2 border-gray-400
                      placeholder-gray-400 text-gray-900 rounded-md focus:outline-none border-[1px]
                       border- focus:ring-primary hover:border-primary focus:border-primary focus:z-10 sm:text-sm"
-                    placeholder="Usuario"
+                    placeholder="Usuario *"
                   />
                   <span className={`required-span ${errors.user_name && "span--actived"}`}>
                   {errors.user_name?.message}
@@ -67,7 +67,7 @@ function LoginPage() {
                     className="appearance-none rounded-md relative block w-full px-3 py-2 border
                      border-gray-400 placeholder-gray-400 text-gray-900 focus:outline-none
                       focus:ring-primary hover:border-primary focus:border-primary focus:z-10 sm:text-sm"
-                    placeholder="Contraseña"
+                    placeholder="Contraseña *"
                   />
                   <span className={`required-span ${errors.password && "span--actived"}`}>
                     {errors.password?.message}

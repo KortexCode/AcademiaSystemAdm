@@ -11,10 +11,8 @@ export function useAprendizService() {
           item.id = item.id_aprendiz;
           delete item.id_aprendiz;
           const personaArray = item.persona;
-          /* personaArray.id = personaArray.id_persona; */
-          /* delete personaArray.id_persona; */
+    
           delete item.persona;
-
           return { ...item, ...personaArray };
         });
         return rowObject;

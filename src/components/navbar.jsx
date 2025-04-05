@@ -74,7 +74,7 @@ function Navbar() {
             </ul>
           </div>
         </nav>
-        <div className="z-10 w-60 h-auto p-3 rounded-b-lg absolute top-[104%] right-0 bg-primary shadow-md shadow-[#4fbd0b]">
+        <div className="hidden z-10 w-60 h-auto p-3 rounded-b-lg absolute top-[104%] right-0 bg-primary shadow-md shadow-[#4fbd0b]">
           <ul className="space-y-3">
             <Link to="/perfil">
               <li className="link-li">

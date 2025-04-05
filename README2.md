@@ -19,20 +19,18 @@ Acamedia_BD es una aplicación de software web para la implementación de un sis
 
 - VITE
 
-## Guía de uso:
-
+## Guía:
 V1.0.0
+- Iniciar proyecto
+`npm install` 
+- Iniciar en modo desarrollo:
+`npm run dev`
 
-En el proyecto encotrarás la carpeta nested, la carpeta assets y un ícono svg:
+El frontend maneja una conexión con la Api del backend por lo que no se podrá acceder a sus funciones sin el servidor del backend no está encendido, pero puede navegar entre rutas actualmente.
 
-### `Página de inicio`
+#### Navegar entre rutas:
+- Para moverse por las vistas actuales vaya a la barra de direcciones. 
+- ruta "/" para login
+- ruta "/menu" para el dashboard
 
-Para acceder a la vista principal, ve a la carpeta nested y abre el archivo index.html, la página de inicio será la primera vista.
 
-#### Acesso:
-
-Ingresa cualquier usuario o contraseña
-
-### `Menú de usuario`
-
-En el menú de usuario podrá elegir entre 4 opciones para consultar las tablas que manejan los datos relacionados con el modelo de negocio de la academia.

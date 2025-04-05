@@ -12,7 +12,7 @@ import {
 import { FaTable } from "react-icons/fa6";
 import "../styles/personView.css";
 
-function PersonView() {
+function Persons() {
   //Servicios
   const { getAprendices } = useAprendizService();
   const { getProfesores } = useProfesorService();
@@ -40,14 +40,14 @@ function PersonView() {
       }; */
 
   const handleShowStundents = () => {
-    console.log("pidiendo estudiante");
+ 
     setColum(columnsAprendiz);
     setRows(rowStudentRef.current);
     setRadioInputStudent(true);
     setRadioInputInstructor(false);
   };
   const handleShowInstructors = () => {
-    console.log("pidiendo profesores");
+ 
     setColum(columnsProfesor);
     setRows(rowInstructorRef.current);
     setRadioInputInstructor(true);
@@ -61,12 +61,11 @@ function PersonView() {
       setRows(resPersonas);
 
       const resStundent = await getAprendices();
-      rowStudentRef.current = resStundent;
-      console.log("aprendices effec", rowStudentRef.current);
-
+      rowStudentRef.current = resStundent; //check ref
+ 
       const resInstructor = await getProfesores();
       rowInstructorRef.current = resInstructor;
-      console.log("profesores en personview", rowInstructorRef.current);
+     
     }
     fetchData();
   }, []);
@@ -81,28 +80,8 @@ function PersonView() {
       </div>
       <div className="container-view w-full px-3 border-2 mb-3 border-t-0 shadow-lg ">
         {/*filtros */}
-        <div className="filter-container w-full flex mt-6 mb-4 space-x-2">
-          <div className="flex justify-center w-40 p-4 border-2 rounded-lg shadow-lg bg-white">
-            <div className="w-full flex flex-col space-x-y">
-              <label className="inline-flex items-center py-2">
-                <input
-                  type="checkbox"
-                  className="text-primary focus:ring-primary"
-                />
-                <span className="ml-2 text-gray-700">Activos</span>
-              </label>
-              <label className="inline-flex items-center py-2">
-                <input
-                  type="checkbox"
-                  className="text-primary focus:ring-primary"
-                />
-                <span className="ml-2 text-gray-700">Inactivos</span>
-              </label>
-            </div>
-          </div>
-
-          <div className="flex w-40 p-4 border-2 rounded-lg shadow-lg bg-white">
-            <div className="w-full flex-col space-x-y">
+        <div className="filter-container w-full flex mt-6 mb-4 space-x-3">
+              
               <div className="flex items-center justify-start py-2">
                 <div>
                   <input
@@ -125,8 +104,7 @@ function PersonView() {
                 />
                 <span className="ml-2 text-gray-700">Instructores</span>
               </div>
-            </div>
-          </div>
+         
         </div>
 
         {/* Vista de tabla */}
@@ -158,4 +136,4 @@ function PersonView() {
   );
 }
 
-export { PersonView };
+export { Persons };
