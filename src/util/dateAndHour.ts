@@ -54,7 +54,6 @@ export class DateHour {
         const fecha = new Date();
         var dia = fecha.getDate();
         var mes = fecha.getMonth()+1;
-        console.log(mes)
         var anio = fecha.getFullYear();
 
         let calculo =  `${anio}-${mes}-${dia}`;

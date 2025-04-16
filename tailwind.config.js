@@ -7,12 +7,14 @@ export default {
     extend: {
       colors: {
         "background": "#222121",
-        "background-card": "#797878",
         primary: "#83ED49",
         "primary-dark": "#56a02f",
-        "text-primary-dark": "#2f4858",
-        "primary-color": "#FF822F",
         "secondary-color": "#B9DA13",
+        "terceary-color": "#FF822F",
+        "text-primary-dark": "#2f4858",
+        "btn-cancel-dark": "#F50428",
+
+        "background-card": "#797878",
         textBody: "#302D2D",
         "front-background": "#030303",
         textTitle: "#FFAF02",

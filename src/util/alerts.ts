@@ -37,7 +37,7 @@ export class Alert {
     });
     Toast.fire({
       icon:"warning",
-      title:"All fields are required"
+      title:"Todos los campos son requeridos"
     });
   }
 
@@ -73,7 +73,7 @@ export class Alert {
     });
     Toast.fire({
       icon:"error",
-      title: "An error ocurred in the server, comunicate with support"
+      title: "Un error ha ocurrido, comunicate con soporte"
     });
   }
 }

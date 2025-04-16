@@ -11,7 +11,9 @@ type Inputs = {
 }
 function LoginPage() {
   const {postLoginInit} = useLoginService();
-  const {register, handleSubmit, formState: {errors}} = useForm<Inputs>({mode: "onChange"});
+  const {register, handleSubmit, formState: {errors}} = useForm<Inputs>({mode: "onBlur",
+    reValidateMode: "onChange",
+  });
 
   //Validación de formularios
   const onSubmit: SubmitHandler<Inputs> = (data) => {

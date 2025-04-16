@@ -1,93 +1,304 @@
-import React from 'react'
+import React, { useState, useRef, useEffect  } from 'react'
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { Link } from 'react-router-dom';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+import { HiEye } from "react-icons/hi";
+import { useLoginService } from '../service/useLoginService';
+import { ValidatedInput } from '../components/validatedInput';
+import { DateHour } from '../util/dateAndHour';
 import logo from "../assets/logoAca.png";
 import "../styles/login.css";
 
+type UserData = {
+  user_name: string,
+  password: string,
+  repeat_password: string,
+  fha_genera: string,
+}
+
+type UserInput = {
+  user_name: string,
+}
+type PasswordInput = {
+  password: string,
+  repeat_password: string,
+}
+type CodeInput = {
+  codigo: string,
+}
+
+//Validación de formulario de usuario
+const userSchema = z.object({
+  user_name: z.string().max(11, { message: "El nombre de usuario debe tener máximo 11 caracteres" })
+    .nonempty({ message: "El nombre de usuario es obligatorio" }),
+})
+
+//Validación de formulario de código
+const codeSchema = z.object({
+  codigo: z.string().min(6, { message: "El código debe tener al menos 6 caracteres" })
+    .max(6, { message: "El código debe tener máximo 6 caracteres" })
+    .nonempty({ message: "El código es obligatorio" }),
+})
+
+//Validación de formulario de contraseña
+const passwordSchema = z.object({
+  password: z.string().min(8, { message: "La contraseña debe tener al menos 6 caracteres" })
+    .max(12, { message: "La contraseña debe tener máximo 8 caracteres" })
+    .nonempty({ message: "La contraseña es obligatoria" })
+    .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+      { message: "La contraseña debe contener al menos una letra mayúscula, una minúscula, un número y un símbolo especial" }),
+  repeat_password: z.string().min(8, { message: "La contraseña debe tener al menos 6 caracteres" })
+    .max(12, { message: "La contraseña debe tener máximo 8 caracteres" })
+    .nonempty({ message: "La contraseña es obligatoria" })
+    .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+      { message: "La contraseña debe contener al menos una letra mayúscula, una minúscula, un número y un símbolo especial" }),
+})
+
 export function ForgotPassword() {
-  /* Lógica para inicio de sesión */
-  const handleSession = () => {
-    const form: any = document.getElementById("formSession");
-    const formData = new FormData(form);
-    const dataForm = Object.fromEntries(formData.entries());
-    console.log(typeof dataForm.user)
-    if (dataForm.user === "" || dataForm.password === "") {
-      alert("Debes llenar los campos vacios para iniciar sesión");
-    } else {
-    
-      const userInfo = {
-        user_name: "1053822008",
-        password: "123"
+  const { postUserValidate, postEmailValidate, postValidateCode } = useLoginService();
+
+  //Estados de los formularios
+  const [toggleUser, setToggleUser] = useState(false);
+  const [toggleCode, setToggleCode] = useState(false);
+  const [togglePassword, setTogglePassword] = useState(true);
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const [isRepeatPasswordVisible, setIsRepeatPasswordVisible] = useState(false);
+
+  let userData = useRef<UserData>({
+    user_name: "",
+    password: "",
+    repeat_password: "",
+    fha_genera: "",
+  })
+
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  //Formulario de usuario
+  const { register: userRegister, handleSubmit: userHandleSubmit, formState: { errors: userErrors } }
+    = useForm<UserInput>({
+      mode: "onBlur",
+      reValidateMode: "onChange",
+      resolver: zodResolver(userSchema),
+    });
+  //Formulario de código
+  const { register: codeRegister, handleSubmit: codeHandleSubmit, formState: { errors: codeErrors } }
+    = useForm<CodeInput>({
+      mode: "onBlur",
+      reValidateMode: "onChange",
+      resolver: zodResolver(codeSchema),
+    });
+  //Formulario de contraseña
+  const { register: passwordRegister, handleSubmit: passwordHandleSubmit, formState: { errors: passwordErrors } }
+    = useForm<PasswordInput>({
+      mode: "onBlur",
+      reValidateMode: "onChange",
+      resolver: zodResolver(passwordSchema),
+    });
+
+
+  //Envío de formulario de usuario
+  const onSubmitUser: SubmitHandler<UserInput> = async (data) => {
+    const validate = await postUserValidate({ numero_documento: data.user_name });
+    if (validate) {
+      //Guardar datos de usuario en un objeto global
+      userData.current.user_name = data.user_name;
+      userData.current.fha_genera = DateHour.fechaOrdenBarra();
+      //Datos para validar email y generar código
+      const userCodeData: any = {
+        user_name: data.user_name,
+        fha_genera: DateHour.fechaOrdenBarra()
+      }
+      //Validar email de usuario para generar código
+      const validSend = await postEmailValidate(userCodeData);
+      if (validSend) {
+        //Mostrar formulario de código
+        setToggleCode(true);
+        //Ocultar formulario de usuario
+        setToggleUser(false);
+
       }
     }
-  };
+  }
+  //Envío de formulario de código
+  const onSubmitCode: SubmitHandler<CodeInput> = async (data) => {
+    const codeToValidate: CodeInput = {
+      codigo: data.codigo
+    }
+    const validate = await postValidateCode(codeToValidate);
+    if(validate){
+      setToggleCode(false);
+      setTogglePassword(true);
+    }
+  }
+  //Envío de formulario de contraseña
+  const onSubmitPassword: SubmitHandler<PasswordInput> = (data) => {
+    console.log(data);
+  }
+  //Reenviar solicitud de código
+  const handleReSend = async () => {
+    console.log('validar usuario',userData.current);
+    //Datos para validar email generar código
+    const userCodeData: any = {
+      user_name: userData.current.user_name,
+      fha_genera: userData.current.fha_genera
+    }
+    //Re validar email de usuario para generar código
+    await postEmailValidate(userCodeData); 
+  }
 
   return (
     <>
       <section className="w-full h-full bg-background">
-        <div className="login-container flex flex-col items-center justify-center md:w-[480px] my-0 mx-auto h-full min-h-screen bg-white px-4 sm:px-6 lg:px-8">
-          <div className="max-w-md w-full space-y-8">
-            <div className="w-full flex justify-center">
-              <img className="w-52" src={logo} alt="logo academia" />
-            </div>
-            <form id="formSession" className="mt-8 space-y-6">
-              <div className="rounded-md shadow-sm space-y-3">
-                <div>
-                  <label htmlFor="usuario" className="sr-only">
-                    Usuario
-                  </label>
-                  <input
-                    id="usuario"
-                    name="user"
-                    type="text"
-                    required
-                    className="appearance-none relative block w-full px-3 py-2 border
-                     border-gray-400 placeholder-gray-400 text-gray-900 rounded-md focus:outline-none focus:ring-primary hover:border-primary focus:border-primary focus:z-10 sm:text-sm"
-                    placeholder="Usuario"
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="contraseña" className="sr-only">
-                    Contraseña
-                  </label>
-                  <input
-                    id="contraseña"
-                    name="password"
-                    type="password"
-                    required
-                    className="appearance-none rounded-md relative block w-full px-3 py-2 border
-                     border-gray-400 placeholder-gray-400 text-gray-900 focus:outline-none focus:ring-primary hover:border-primary focus:border-primary focus:z-10 sm:text-sm"
-                    placeholder="Contraseña"
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="contraseña" className="sr-only">
-                    Repetir Contraseña
-                  </label>
-                  <input
-                    id="contraseña"
-                    name="password"
-                    type="password"
-                    required
-                    className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-400 placeholder-gray-400 text-gray-900 focus:outline-none focus:ring-primary hover:border-primary focus:border-primary focus:z-10 sm:text-sm"
-                    placeholder="Repetir contraseña"
-                  />
-                </div>
-              </div>
-
-              <div>
+        <div className="flex flex-col items-center justify-around w-full h-full min-h-screen md:w-[480px] my-0 mx-auto 
+           px-4 sm:px-6 lg:px-8 space-y-6 login-container bg-white">
+          <div className="w-full flex justify-center">
+            <img className="w-52" src={logo} alt="logo academia" />
+          </div>
+          {/* FORMULARIO DE USUARIO */}
+          {toggleUser && <form onSubmit={userHandleSubmit(onSubmitUser)} className='w-full'>
+            <div>
+              <p className='mb-4 text-center text-base font-normal'>Valida tu nombre de usuario para verificar tu cuenta.</p>
+              <label htmlFor="usuario" className="sr-only">
+                Usuario
+              </label>
+              <input
+                id="usuario"
+                type='text'
+                {...userRegister("user_name")}
+                className="appearance-none relative block w-full px-3 py-2 border
+                     border-gray-400 placeholder-gray-400 text-gray-900 rounded-md focus:outline-none
+                      focus:ring-primary hover:border-primary focus:border-primary focus:z-10 sm:text-sm"
+                placeholder="nombre de usuario *"
+              />
+              <ValidatedInput errors={userErrors} name="user_name" />
+              <div className="flex justify-between mt-6 gap-2">
                 <button
-                type="button"
-                  className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-lg font-semibold rounded-md text-zinc-900 bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
-                  onClick={handleSession}
+                  type="submit"
+                  className="relative w-full flex justify-center py-2 px-4 border border-transparent
+                      text-lg font-semibold rounded-md text-zinc-900 bg-primary hover:bg-primary-dark
+                      focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
                 >
-                  Guardar
+                  Validar
                 </button>
               </div>
-            </form>
+            </div>
+          </form>}
+
+          {/* FORMULARIO DE CÓDIGO */}
+          {toggleCode && <form onSubmit={codeHandleSubmit(onSubmitCode)} className='w-full'>
+            <div>
+            <p className='mb-4 text-center text-base font-normal'>Ingresa el código que recibiste en la bandeja de tu correo electrónico.</p>
+              <label htmlFor="codigo" className="sr-only">
+                Código
+              </label>
+              <input
+                id="codigo"
+                type='number'
+                {...codeRegister("codigo")}
+                className="appearance-none relative block w-full mt-1 px-3 py-2 border
+                     border-gray-400 placeholder-gray-400 text-gray-900 rounded-md focus:outline-none
+                      focus:ring-primary hover:border-primary focus:border-primary focus:z-10 sm:text-sm"
+                placeholder="código *"
+              />
+              <ValidatedInput errors={codeErrors} name="codigo" />
+            </div>
+            <div className="flex justify-between mt-6 gap-2">
+              <button
+                type="submit"
+                className="relative w-full flex justify-center py-2 px-4 border border-transparent
+                      text-lg font-semibold rounded-md text-zinc-800 bg-primary hover:bg-primary-dark
+                      focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+              >
+                Validar código
+              </button>
+              <button
+              onClick={handleReSend}
+              type = "button"
+              className="relative w-full flex justify-center py-2 px-4 border border-transparent
+                      text-lg font-semibold rounded-md text-zinc-800 bg-green-600 hover:bg-green-800
+                      focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary" 
+              >
+                  Reenviar solicitud
+              </button>
           </div>
-        </div>
-      </section>
+          </form>}
+
+        {/* CONTRASEÑA */}
+        {togglePassword && <form onSubmit={passwordHandleSubmit(onSubmitPassword)} className='w-full'>
+          <div>
+          <p className='mb-4 text-center text-base font-normal'>Ingresa tu nueva contraseña.</p>
+            <label htmlFor="password" className="sr-only">
+              Contraseña
+            </label>
+            <div className='flex items-center gap-2 appearance-none rounded-md relative w-full mt-1 px-3 py-2 border
+                      border-gray-400 placeholder-gray-400 text-gray-900 focus:outline-none
+                        focus:ring-primary hover:border-primary focus:border-primary focus:z-10 sm:text-sm'>
+
+              <input
+                id="password"
+                type={isPasswordVisible ? "text" : "password"}
+                {...passwordRegister("password")}
+                className="appearance-none relative block w-full border-none focus:outline-none"
+                placeholder="Ingrese contraseña *"
+              />
+              <HiEye 
+                onClick={() => setIsPasswordVisible(!isPasswordVisible)} 
+                size={25} 
+                className='cursor-pointer text-gray-500 hover:text-primary'
+              />
+            </div>
+            <ValidatedInput errors={passwordErrors} name="password" />
+          </div>
+
+          {/* REPETIR CONTRASEÑA */}
+          <div>
+            <label htmlFor="repeat-password" className="sr-only">
+              Repetir Contraseña
+            </label>
+            <div className='flex items-center gap-2 appearance-none rounded-md relative w-full mt-1 px-3 py-2 border
+                      border-gray-400 placeholder-gray-400 text-gray-900 focus:outline-none
+                        focus:ring-primary hover:border-primary focus:border-primary focus:z-10 sm:text-sm'>
+
+              <input
+                id="repeat-password"
+                type={isRepeatPasswordVisible ? "text" : "password"}
+                {...passwordRegister("repeat_password")}
+                className="appearance-none relative block w-full border-none focus:outline-none"
+                placeholder="repetir contraseña *"
+              />
+              <HiEye 
+                onClick={() => setIsRepeatPasswordVisible(!isRepeatPasswordVisible)} 
+                size={25} 
+                className='cursor-pointer text-gray-500 hover:text-primary'
+              />
+            </div>
+            
+            <ValidatedInput errors={passwordErrors} name="repeat_password" />
+          </div>
+          <div className="flex justify-between mt-4 gap-2">
+            <button
+              type="submit"
+              className="relative w-full flex justify-center py-2 px-4 border border-transparent
+                      text-lg font-semibold rounded-md text-zinc-900 bg-primary hover:bg-primary-dark
+                      focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+            >
+              Validar
+            </button>
+          </div>
+        </form>}
+        <Link className="w-full" to="/">
+          <button
+            type="submit"
+            className="relative w-full flex justify-center mb-2 py-2 px-4 border border-transparent
+                    text-lg text-black font-semibold rounded-md  bg-gray-400 hover:bg-gray-600
+                      focus:outline-none focus:ring-2 focus:ring-offset-2"
+          >
+            Cancelar
+          </button>
+        </Link>
+      </div>
+    </section >
     </>
   );
 }

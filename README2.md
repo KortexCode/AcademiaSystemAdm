@@ -29,8 +29,8 @@ V1.0.0
 El frontend maneja una conexión con la Api del backend por lo que no se podrá acceder a sus funciones sin el servidor del backend no está encendido, pero puede navegar entre rutas actualmente.
 
 #### Navegar entre rutas:
-- Para moverse por las vistas actuales vaya a la barra de direcciones. 
-- ruta "/" para login
-- ruta "/menu" para el dashboard
+- Para moverse por las vistas actuales vaya a la barra de direcciones y use las siguientes rutas. 
+- ruta "#/" para login
+- ruta "#/menu" para el dashboard
 
 
