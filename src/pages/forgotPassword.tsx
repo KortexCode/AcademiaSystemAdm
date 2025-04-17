@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect  } from 'react'
+import React, { useState, useRef } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -6,28 +6,20 @@ import { z } from 'zod';
 import { HiEye } from "react-icons/hi";
 import { useLoginService } from '../service/useLoginService';
 import { ValidatedInput } from '../components/validatedInput';
+import { Alert } from '../util/alerts';
 import { DateHour } from '../util/dateAndHour';
 import logo from "../assets/logoAca.png";
 import "../styles/login.css";
 
 type UserData = {
   user_name: string,
-  password: string,
-  repeat_password: string,
   fha_genera: string,
 }
+type UserInput = z.infer<typeof userSchema>;
+type PasswordInput = z.infer<typeof passwordSchema>;
+type CodeInput = z.infer<typeof codeSchema>;
 
-type UserInput = {
-  user_name: string,
-}
-type PasswordInput = {
-  password: string,
-  repeat_password: string,
-}
-type CodeInput = {
-  codigo: string,
-}
-
+//ESQUEMAS DE VALIDACIÓN DE ZOD PARA LOS FORMULARIOS DE REACT-HOOK-FORM
 //Validación de formulario de usuario
 const userSchema = z.object({
   user_name: z.string().max(11, { message: "El nombre de usuario debe tener máximo 11 caracteres" })
@@ -43,36 +35,33 @@ const codeSchema = z.object({
 
 //Validación de formulario de contraseña
 const passwordSchema = z.object({
-  password: z.string().min(8, { message: "La contraseña debe tener al menos 6 caracteres" })
-    .max(12, { message: "La contraseña debe tener máximo 8 caracteres" })
-    .nonempty({ message: "La contraseña es obligatoria" })
-    .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
-      { message: "La contraseña debe contener al menos una letra mayúscula, una minúscula, un número y un símbolo especial" }),
-  repeat_password: z.string().min(8, { message: "La contraseña debe tener al menos 6 caracteres" })
-    .max(12, { message: "La contraseña debe tener máximo 8 caracteres" })
-    .nonempty({ message: "La contraseña es obligatoria" })
-    .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
-      { message: "La contraseña debe contener al menos una letra mayúscula, una minúscula, un número y un símbolo especial" }),
+  password: z.string().nonempty({ message: "La contraseña es obligatoria" })
+    .max(12, { message: "La contraseña debe tener máximo 12 caracteres" })
+    .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/,
+      { message: "Debe el formato mayúscula, minúscula, número y símbolo especial" }),
+  repeat_password: z.string().nonempty({ message: "La contraseña es obligatoria" })
+    .max(12, { message: "La contraseña debe tener máximo 12 caracteres" })
+    .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/,
+      { message: "Debe contener al menos una letra mayúscula, una minúscula, un número y un símbolo especial" }),
+}).refine((data) => data.password === data.repeat_password, {
+  path: ["repeat_password"],
+  message: "Las contraseñas no coinciden"
 })
-
+//COMPONENTE DE RECUPERACIÓN DE CONTRASEÑA
 export function ForgotPassword() {
-  const { postUserValidate, postEmailValidate, postValidateCode } = useLoginService();
+  const { postUserValidate, postEmailValidate, postValidateCode, putPasswordUpdate } = useLoginService();
 
   //Estados de los formularios
-  const [toggleUser, setToggleUser] = useState(false);
+  const [toggleUser, setToggleUser] = useState(true);
   const [toggleCode, setToggleCode] = useState(false);
-  const [togglePassword, setTogglePassword] = useState(true);
+  const [togglePassword, setTogglePassword] = useState(false);
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [isRepeatPasswordVisible, setIsRepeatPasswordVisible] = useState(false);
 
   let userData = useRef<UserData>({
     user_name: "",
-    password: "",
-    repeat_password: "",
     fha_genera: "",
   })
-
-  const inputRef = useRef<HTMLInputElement>(null);
 
   //Formulario de usuario
   const { register: userRegister, handleSubmit: userHandleSubmit, formState: { errors: userErrors } }
@@ -89,10 +78,9 @@ export function ForgotPassword() {
       resolver: zodResolver(codeSchema),
     });
   //Formulario de contraseña
-  const { register: passwordRegister, handleSubmit: passwordHandleSubmit, formState: { errors: passwordErrors } }
+  const { register: passwordRegister, handleSubmit: passwordHandleSubmit, formState: { errors: passwordErrors, touchedFields }, trigger }
     = useForm<PasswordInput>({
       mode: "onBlur",
-      reValidateMode: "onChange",
       resolver: zodResolver(passwordSchema),
     });
 
@@ -103,7 +91,6 @@ export function ForgotPassword() {
     if (validate) {
       //Guardar datos de usuario en un objeto global
       userData.current.user_name = data.user_name;
-      userData.current.fha_genera = DateHour.fechaOrdenBarra();
       //Datos para validar email y generar código
       const userCodeData: any = {
         user_name: data.user_name,
@@ -126,25 +113,46 @@ export function ForgotPassword() {
       codigo: data.codigo
     }
     const validate = await postValidateCode(codeToValidate);
-    if(validate){
+    if (validate) {
       setToggleCode(false);
       setTogglePassword(true);
     }
   }
   //Envío de formulario de contraseña
   const onSubmitPassword: SubmitHandler<PasswordInput> = (data) => {
-    console.log(data);
+    if (data.password !== data.repeat_password) {
+      Alert.errorAlert('Las contraseñas no coinciden');
+      return
+    }
+    const dataPassword = {
+      user_name: userData.current.user_name,
+      password: data.password,
+    }
+    putPasswordUpdate(dataPassword);
+    setTogglePassword(false);
   }
   //Reenviar solicitud de código
   const handleReSend = async () => {
-    console.log('validar usuario',userData.current);
+    console.log('validar usuario', userData.current);
     //Datos para validar email generar código
     const userCodeData: any = {
       user_name: userData.current.user_name,
       fha_genera: userData.current.fha_genera
     }
     //Re validar email de usuario para generar código
-    await postEmailValidate(userCodeData); 
+    await postEmailValidate(userCodeData);
+  }
+  //Validación de contraseña dinámico
+  const handleChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // Si el campo ha sido tocado y hay errores, validamos al cambiar
+    if (touchedFields.password && passwordErrors.password) {
+      trigger('password'); // Forzar la validación del campo 'password'
+      return;
+    }
+    if (touchedFields.repeat_password && passwordErrors.repeat_password) {
+      trigger('repeat_password'); // Forzar la validación del campo 'repeat_password'
+      return;
+    }
   }
 
   return (
@@ -153,7 +161,7 @@ export function ForgotPassword() {
         <div className="flex flex-col items-center justify-around w-full h-full min-h-screen md:w-[480px] my-0 mx-auto 
            px-4 sm:px-6 lg:px-8 space-y-6 login-container bg-white">
           <div className="w-full flex justify-center">
-            <img className="w-52" src={logo} alt="logo academia" />
+            <img className="w-48" src={logo} alt="logo academia" />
           </div>
           {/* FORMULARIO DE USUARIO */}
           {toggleUser && <form onSubmit={userHandleSubmit(onSubmitUser)} className='w-full'>
@@ -188,7 +196,7 @@ export function ForgotPassword() {
           {/* FORMULARIO DE CÓDIGO */}
           {toggleCode && <form onSubmit={codeHandleSubmit(onSubmitCode)} className='w-full'>
             <div>
-            <p className='mb-4 text-center text-base font-normal'>Ingresa el código que recibiste en la bandeja de tu correo electrónico.</p>
+              <p className='mb-4 text-center text-base font-normal'>Ingresa el código que recibiste en la bandeja de tu correo electrónico.</p>
               <label htmlFor="codigo" className="sr-only">
                 Código
               </label>
@@ -213,92 +221,106 @@ export function ForgotPassword() {
                 Validar código
               </button>
               <button
-              onClick={handleReSend}
-              type = "button"
-              className="relative w-full flex justify-center py-2 px-4 border border-transparent
+                onClick={handleReSend}
+                type="button"
+                className="relative w-full flex justify-center py-2 px-4 border border-transparent
                       text-lg font-semibold rounded-md text-zinc-800 bg-green-600 hover:bg-green-800
-                      focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary" 
+                      focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
               >
-                  Reenviar solicitud
+                Reenviar solicitud
               </button>
-          </div>
+            </div>
           </form>}
 
-        {/* CONTRASEÑA */}
-        {togglePassword && <form onSubmit={passwordHandleSubmit(onSubmitPassword)} className='w-full'>
-          <div>
-          <p className='mb-4 text-center text-base font-normal'>Ingresa tu nueva contraseña.</p>
-            <label htmlFor="password" className="sr-only">
-              Contraseña
-            </label>
-            <div className='flex items-center gap-2 appearance-none rounded-md relative w-full mt-1 px-3 py-2 border
+          {/*FORMULARIO CONTRASEÑA */}
+          {togglePassword && <form onSubmit={passwordHandleSubmit(onSubmitPassword)} className='w-full'>
+            <div>
+              <p className='mb-4 text-center text-base font-normal'>Ingresa tu nueva contraseña.</p>
+
+              <div>
+                <label htmlFor="password" className="sr-only">
+                  ingresa tu contraseña
+                </label>
+                <div className='flex items-center gap-2 appearance-none rounded-md relative w-full mt-1 px-3 py-2 border
                       border-gray-400 placeholder-gray-400 text-gray-900 focus:outline-none
                         focus:ring-primary hover:border-primary focus:border-primary focus:z-10 sm:text-sm'>
 
-              <input
-                id="password"
-                type={isPasswordVisible ? "text" : "password"}
-                {...passwordRegister("password")}
-                className="appearance-none relative block w-full border-none focus:outline-none"
-                placeholder="Ingrese contraseña *"
-              />
-              <HiEye 
-                onClick={() => setIsPasswordVisible(!isPasswordVisible)} 
-                size={25} 
-                className='cursor-pointer text-gray-500 hover:text-primary'
-              />
-            </div>
-            <ValidatedInput errors={passwordErrors} name="password" />
-          </div>
+                  <input
+                    id="password"
+                    type={isPasswordVisible ? "text" : "password"}
+                    {...passwordRegister("password", { onChange: handleChangePassword })}
+                    className="appearance-none relative block w-full border-none focus:outline-none"
+                    placeholder="ingresa tu contraseña *"
+                  />
+                  <button
+                    type="button"
+                    onMouseDown={(e) => {
+                      setIsPasswordVisible(!isPasswordVisible);
+                    }}
+                    className="cursor-pointer text-gray-500 hover:text-primary focus:outline-none focus:text-primary"
+                  >
+                    <HiEye size={25} />
+                  </button>
+                </div>
 
-          {/* REPETIR CONTRASEÑA */}
-          <div>
-            <label htmlFor="repeat-password" className="sr-only">
-              Repetir Contraseña
-            </label>
-            <div className='flex items-center gap-2 appearance-none rounded-md relative w-full mt-1 px-3 py-2 border
+                <ValidatedInput errors={passwordErrors} name="password" />
+              </div>
+
+              <div>
+                <label htmlFor="repeat-password" className="sr-only">
+                  Repetir Contraseña
+                </label>
+                <div className='flex items-center gap-2 appearance-none rounded-md relative w-full mt-1 px-3 py-2 border
                       border-gray-400 placeholder-gray-400 text-gray-900 focus:outline-none
                         focus:ring-primary hover:border-primary focus:border-primary focus:z-10 sm:text-sm'>
 
-              <input
-                id="repeat-password"
-                type={isRepeatPasswordVisible ? "text" : "password"}
-                {...passwordRegister("repeat_password")}
-                className="appearance-none relative block w-full border-none focus:outline-none"
-                placeholder="repetir contraseña *"
-              />
-              <HiEye 
-                onClick={() => setIsRepeatPasswordVisible(!isRepeatPasswordVisible)} 
-                size={25} 
-                className='cursor-pointer text-gray-500 hover:text-primary'
-              />
+                  <input
+                    id="repeat-password"
+                    type={isRepeatPasswordVisible ? "text" : "password"}
+                    {...passwordRegister("repeat_password", { onChange: handleChangePassword })}
+                    className="appearance-none relative block w-full border-none focus:outline-none"
+                    placeholder="repetir contraseña *"
+                  />
+                  <button
+                    type="button"
+                    onMouseDown={(e) => {
+                      setIsRepeatPasswordVisible(!isRepeatPasswordVisible);
+                    }}
+                    className="cursor-pointer text-gray-500 hover:text-primary focus:outline-none focus:text-primary"
+                  >
+                    <HiEye size={25} />
+                  </button>
+                </div>
+
+                <ValidatedInput errors={passwordErrors} name="repeat_password" />
+              </div>
+
             </div>
-            
-            <ValidatedInput errors={passwordErrors} name="repeat_password" />
-          </div>
-          <div className="flex justify-between mt-4 gap-2">
+
+            <div className="flex justify-between mt-4 gap-2">
+              <button
+                type="submit"
+                className="relative w-full flex justify-center py-2 px-4 border border-transparent
+                      text-lg font-semibold rounded-md text-zinc-800 bg-primary hover:bg-primary-dark
+                      focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+              >
+                Actualizar
+              </button>
+            </div>
+          </form>}
+          {/* BOTÓN DE CANCELAR */}
+          <Link className="w-full" to="/">
             <button
               type="submit"
-              className="relative w-full flex justify-center py-2 px-4 border border-transparent
-                      text-lg font-semibold rounded-md text-zinc-900 bg-primary hover:bg-primary-dark
-                      focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
-            >
-              Validar
-            </button>
-          </div>
-        </form>}
-        <Link className="w-full" to="/">
-          <button
-            type="submit"
-            className="relative w-full flex justify-center mb-2 py-2 px-4 border border-transparent
-                    text-lg text-black font-semibold rounded-md  bg-gray-400 hover:bg-gray-600
+              className="relative w-full flex justify-center mb-2 py-2 px-4 border border-transparent
+                    text-lg text-zinc-800 font-semibold rounded-md  bg-gray-400 hover:bg-gray-600
                       focus:outline-none focus:ring-2 focus:ring-offset-2"
-          >
-            Cancelar
-          </button>
-        </Link>
-      </div>
-    </section >
+            >
+              Cancelar
+            </button>
+          </Link>
+        </div>
+      </section >
     </>
   );
 }

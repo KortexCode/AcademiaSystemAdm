@@ -85,11 +85,27 @@ export function useLoginService() {
             Alert.systemErrorAlert();
         }
     }
+    //Servicio para cambiar contraseña
+    const putPasswordUpdate = async (userInfo: UserInfo) => {
+        try {
+            const {data} = await axiosInstance.put('login/actualizar-password', userInfo);
+            if(data.status === "false"){
+                Alert.errorAlert(data.message);
+            }
+            if(data.status === "true"){
+                Alert.succesAlert(data.message);
+                navigate('/');
+            }
+        } catch (error) {
+            Alert.systemErrorAlert();
+        }
+    }
 
   return {
     postLoginInit,
     postUserValidate,
     postEmailValidate,
-    postValidateCode
+    postValidateCode,
+    putPasswordUpdate
   }
 }

@@ -4,28 +4,37 @@ import { useLoginService } from "../service/useLoginService";
 import logo from "../assets/logoAca.png";
 import "../styles/login.css";
 import { useState } from "react";
+import { ValidatedInput } from "../components/validatedInput";
+import { HiEye } from "react-icons/hi";
 
 type Inputs = {
   user_name: string,
   password: string
 }
 function LoginPage() {
-  const {postLoginInit} = useLoginService();
-  const {register, handleSubmit, formState: {errors}} = useForm<Inputs>({mode: "onBlur",
-    reValidateMode: "onChange",
-  });
+  const { postLoginInit } = useLoginService();
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const { register, handleSubmit, formState: { errors, touchedFields }, trigger } = useForm<Inputs>({ mode: "onBlur" });
 
   //Validación de formularios
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-  
-    const {user_name, password} = data;
+    const { user_name, password } = data;
     const userInfo = {
       user_name,
       password,
     }
     postLoginInit(userInfo);
   };
-  console.log("re renders")
+
+  //Validación de contraseña dinámico
+  const handleChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // Si el campo ha sido tocado y hay errores, validamos al cambiar
+    if (touchedFields.password && errors.password) {
+      trigger('password'); // Forzar la validación del campo 'password'
+      return;
+    }
+  }
+
   return (
     <>
       <section className="w-full h-ful bg-background">
@@ -45,7 +54,7 @@ function LoginPage() {
                     Usuario
                   </label>
                   <input
-                  {...register("user_name", { required: "Nombre de usuario obligatorio" })}
+                    {...register("user_name", { required: "Nombre de usuario obligatorio" })}
                     id="usuario"
                     type="text"
                     className="appearance-none relative block w-full px-3 py-2 border-gray-400
@@ -54,47 +63,57 @@ function LoginPage() {
                     placeholder="Usuario *"
                   />
                   <span className={`required-span ${errors.user_name && "span--actived"}`}>
-                  {errors.user_name?.message}
+                    {errors.user_name?.message}
                   </span>
                 </div>
 
                 <div>
-                  <label htmlFor="contraseña" className="sr-only">
-                    Contraseña
+                  <label htmlFor="password" className="sr-only">
+                    ingresa tu contraseña
                   </label>
-                  <input
-                  {...register("password", { required: "Contraseña obligatoria"})}
-                    id="contraseña"
-                    type="password"
-                    className="appearance-none rounded-md relative block w-full px-3 py-2 border
-                     border-gray-400 placeholder-gray-400 text-gray-900 focus:outline-none
-                      focus:ring-primary hover:border-primary focus:border-primary focus:z-10 sm:text-sm"
-                    placeholder="Contraseña *"
-                  />
-                  <span className={`required-span ${errors.password && "span--actived"}`}>
-                    {errors.password?.message}
-                  </span>
+                  <div className='flex items-center gap-2 appearance-none rounded-md relative w-full mt-1 px-3 py-2 border
+                      border-gray-400 placeholder-gray-400 text-gray-900 focus:outline-none
+                        focus:ring-primary hover:border-primary focus:border-primary focus:z-10 sm:text-sm'>
+
+                    <input
+                      id="password"
+                      type={isPasswordVisible ? "text" : "password"}
+                      {...register("password", { required: "Contraseña obligatoria", onChange: handleChangePassword })}
+                      className="appearance-none relative block w-full border-none focus:outline-none"
+                      placeholder="ingresa tu contraseña *"
+                    />
+                    <button
+                      type="button"
+                      onMouseDown={(e) => {
+                        setIsPasswordVisible(!isPasswordVisible);
+                      }}
+                      className="cursor-pointer text-gray-500 hover:text-primary focus:outline-none focus:text-primary"
+                    >
+                      <HiEye size={25} />
+                    </button>
+                  </div>
+                  <ValidatedInput errors={errors} name="password" />
                 </div>
               </div>
-              {/* //OLVIDÓ CONTRASEÑA */}
+
               <div className="flex justify-center w-full">
                 <div className="text-sm">
                   <Link to={"/olvido-password"}>
-                  <p
-                    className="font-medium text-primary hover:text-primary-dark"
-                  >
-                    ¿Olvidaste tu contraseña?
-                  </p>
+                    <p
+                      className="font-medium text-primary hover:text-primary-dark"
+                    >
+                      ¿Olvidaste tu contraseña?
+                    </p>
                   </Link>
                 </div>
               </div>
               {/* //BOTÓN DE INGRESAR */}
               <div>
                 <button
-                type="submit"
+                  type="submit"
                   className="group relative w-full flex justify-center py-2 px-4 border border-transparent
-                   text-lg font-semibold rounded-md text-zinc-900 bg-primary hover:bg-primary-dark
-                    focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+                       text-lg font-semibold rounded-md text-zinc-900 bg-primary hover:bg-primary-dark
+                        focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
                 >
                   Ingresar
                 </button>
