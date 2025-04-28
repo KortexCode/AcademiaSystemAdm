@@ -1,0 +1,46 @@
+#loader {
+    position: relative;
+    animation: spin 1.2s linear infinite;
+}
+
+#loader::after, #loader::before {
+    content: '';
+    position: absolute;
+    border-radius: inherit;
+}
+
+#loader::before {
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(0deg,  #83ED49 0%, #B9DA13 100%);
+}
+#loader::after {
+    width: 85%;
+    height: 85%;
+    background-color: white;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+#loading-text {
+    animation: defulter 1.5s linear infinite;
+}
+
+@keyframes defulter {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.2;
+    }
+    100% {
+        opacity: 1;
+    }
+}

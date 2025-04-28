@@ -4,14 +4,14 @@ import {
   Route,
 } from "react-router-dom";
 import { Layout } from "../layout/index";
-import { LoginPage } from "../pages/login";
+import { LoginPage } from "../pages/loginView/login";
 import { NotFound } from "../pages/notFound";
 import { AddPersonView } from "../pages/addPersonView";
 import { ProgramView } from "../pages/programView";
 import { RegistrationView } from "../pages/registrationView";
 import { AccountingView } from "../pages/accountingView";
 import { AddAccountingView } from "../pages/addAccountingView";
-import {ForgotPassword} from "../pages/forgotPassword"
+import {ForgotPassword} from "../pages/forgotPasswordView/forgotPassword"
 import { Dashboard } from "../pages/dashboard";
 import { Persons } from "../pages/persons";
 

@@ -1,0 +1,7 @@
+.required-span {
+    @apply ms-1 text-sm text-red-500 font-normal opacity-0 transition duration-[.5s] ease-in-out;
+}
+
+.span--actived {
+    @apply opacity-100
+}
