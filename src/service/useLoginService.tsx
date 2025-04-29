@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from "react-router-dom";
-import { axiosInstance } from "../util/axios.util";
-import { Alert } from '../util/alerts';
+import { axiosInstance } from "../utils/axios.util";
+import { Alert } from '../utils/alerts';
 
 type UserInfo ={
     user_name: string;
@@ -26,12 +26,11 @@ export function useLoginService() {
         setIsLoading(true);
         try {
             const {data} = await axiosInstance.post('login/inicio-sesion', userInfo);
-            console.log("data", data); 
             if(data.status === "true") {
                 localStorage.setItem('user', userInfo.user_name);
                 localStorage.setItem('token', data.token);
                 Alert.succesAlert(data.message);
-                navigate("./menu");
+                navigate("./inicio");
             }
             if(data.status === "false"){
                 Alert.errorAlert(data.message); 
@@ -49,7 +48,6 @@ export function useLoginService() {
         setIsLoading(true);
         try {
             const {data} = await axiosInstance.post('login/validar-usuario', user_data);
-            console.log(data)
             if(data.status === "false"){
                 Alert.errorAlert(data.message);
                 return false;

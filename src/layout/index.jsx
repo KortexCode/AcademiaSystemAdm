@@ -1,6 +1,6 @@
 import { Outlet, useLocation } from "react-router-dom";
 import { useGlobal } from "../hooks/useGlobal";
-import { Navbar } from "../components/navbar";
+import { Navbar } from "../shared/components/header/navbar";
 
 function Layout() {
   const [global] = useGlobal();
@@ -10,7 +10,7 @@ function Layout() {
   const hideNavbar = location.pathname === "/" || location.pathname === "/olvido-password"
 
   return (
-    <div className="w-full h-auto relative">
+    <div className="w-full h-full">
       {!hideNavbar && <Navbar />}
       <Outlet context={global} />
     </div>

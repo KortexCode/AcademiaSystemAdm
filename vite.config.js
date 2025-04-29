@@ -24,6 +24,16 @@ export default defineConfig(({ command, mode }) => {
   } else {
     console.log(command, mode);
     return {
+      resolve: {
+        alias: {
+          "@": resolve(__dirname, "src"),
+          "@assets": resolve(__dirname, "src/assets"),
+          "@pages": resolve(__dirname, "src/pages"),
+          "@shared": resolve(__dirname, "src/shared"),
+          "@utils": resolve(__dirname, "src/utils"),
+          "@services": resolve(__dirname, "src/services"),
+        },
+      },
       plugins: [react()],
       server: {
         port: 8080,

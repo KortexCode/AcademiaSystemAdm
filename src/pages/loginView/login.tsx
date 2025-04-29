@@ -5,8 +5,8 @@ import { useLoginService } from "../../service/useLoginService";
 import { ValidatedInput } from "../../components/validatedInput";
 import {AnimationLoader} from "../../shared/components/loginLoader/animationLoader";
 import { HiEye } from "react-icons/hi";
-import logo from "../../assets/logoAca.png";
-import "./login.css";
+import logo from "@assets/logoAca.png";
+import "./styles.css";
 
 type Inputs = {
   user_name: string,
@@ -99,7 +99,7 @@ function LoginPage() {
                           onChange: handleChangePassword,
                         })}
                         className="appearance-none relative block w-full border-none focus:outline-none"
-                        placeholder="ingresa tu contraseña *"
+                        placeholder="Ingresa tu contraseña *"
                       />
                       <button
                         type="button"

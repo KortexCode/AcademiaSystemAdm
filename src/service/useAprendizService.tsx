@@ -1,4 +1,4 @@
-import { axiosInstance } from "../util/axios.util";
+import { axiosInstance } from "../utils/axios.util";
 
 export function useAprendizService() {
   const getAprendices = async () => {

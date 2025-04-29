@@ -1,16 +1,16 @@
 import { useEffect, useState, useRef } from "react";
-import { useAprendizService } from "../service/useAprendizService";
-import { useProfesorService } from "../service/useProfesorService";
-import { usePersonService } from "../service/usePersonService";
+import { useAprendizService } from "../../service/useAprendizService";
+import { useProfesorService } from "../../service/useProfesorService";
+import { usePersonService } from "../../service/usePersonService";
 import { Link } from "react-router-dom";
-import { TableData } from "../components/tableData";
+import { TableData } from "../../components/tableData";
 import {
   columsPerson,
   columnsAprendiz,
   columnsProfesor,
-} from "../util/personColums";
-import { FaTable } from "react-icons/fa6";
-import "../styles/personView.css";
+} from "../../utils/personColums";
+import { HiUserGroup } from "react-icons/hi";
+import "./styles.css";
 
 function Persons() {
   //Servicios
@@ -71,12 +71,12 @@ function Persons() {
   }, []);
 
   return (
-    <div className="w-[100%] pt-[56px]">
-      <div className="w-full flex items-center justify-center  p-2 bg-primary text-gray-900">
-        <h3 className="me-2 text-2xl font-extrabold  text-center">
-          Tabla Personas
+    <div className="w-[100%] pt-[56px] z-0">
+      <div className="w-full flex items-center justify-start gap-2  pt-4 pl-3  text-gray-600">
+        <h3 className="text-lg font-bold text-center p-0 m-0">
+          Módulo de Personas
         </h3>
-        <FaTable size={22} className="mt-1" />
+        <HiUserGroup size={22} />
       </div>
       <div className="container-view w-full px-3 border-2 mb-3 border-t-0 shadow-lg ">
         {/*filtros */}
