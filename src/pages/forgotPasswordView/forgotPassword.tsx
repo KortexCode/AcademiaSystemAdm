@@ -106,7 +106,7 @@ export function ForgotPassword() {
       //Guardar datos de usuario en un objeto global
       userData.current.user_name = data.user_name;
       //Datos para validar email y generar código
-      const userCodeData: any = {
+      const userCodeData = {
         user_name: data.user_name,
         fha_genera: DateHour.fechaOrdenBarra()
       }

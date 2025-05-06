@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useAuthenticated } from "../../../hooks/useAuthenticated";
 import { Link } from "react-router-dom";
 import { HiMenuAlt1 } from "react-icons/hi";
 import { HiUser } from "react-icons/hi";
@@ -10,12 +11,14 @@ import "./styles.css";
 
 
 function Navbar() {
+
   const [openMenu, setOpenMenu] = useState(false);
  
   const handleToggleOpenMenu = () => {
     console.log("entrando", openMenu)
     setOpenMenu(!openMenu);
   };
+
 
   return (
     <>
@@ -45,23 +48,6 @@ function Navbar() {
             </li>
           </ul>
         </nav>
-        <div className="hidden z-10 w-60 h-auto p-3 rounded-b-lg absolute top-[104%] right-0 bg-primary shadow-md shadow-[#4fbd0b]">
-          <ul className="space-y-3">
-            <Link to="/perfil">
-              <li className="link-li">
-                <HiUser size={20} />
-                <span className="font-semibold">Perfil</span>
-              </li>
-            </Link>
-            <li className="">
-              <hr className="border border-[#4fbd0b]" />
-            </li>
-            <li className="link-li">
-              <HiLogin size={20} />{" "}
-              <span className="inline-block font-semibold">Cerrar sesión</span>
-            </li>
-          </ul>
-        </div>
       </header>
       {openMenu && <SidebarMenu closeMenu={setOpenMenu}/>}
     </>

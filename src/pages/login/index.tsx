@@ -2,8 +2,8 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useLoginService } from "../../service/useLoginService";
-import { ValidatedInput } from "../../components/validatedInput";
-import {AnimationLoader} from "../../shared/components/loginLoader/animationLoader";
+import { ValidatedInput } from "@shared/components/validaterInput/validatedInput";
+import { AnimationLoader } from "@shared/components/loginLoader/animationLoader";
 import { HiEye } from "react-icons/hi";
 import logo from "@assets/logoAca.png";
 import "./styles.css";
@@ -12,7 +12,7 @@ type Inputs = {
   user_name: string,
   password: string
 }
-function LoginPage() {
+function Login() {
   const { postLoginInit, isLoading } = useLoginService();
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const { register, handleSubmit, formState: { errors, touchedFields }, trigger } = useForm<Inputs>({ mode: "onBlur" });
@@ -54,6 +54,7 @@ function LoginPage() {
             {/* //FORMULARIO */}
             {!isLoading && (
               <form
+                data-testid="login-form"
                 onSubmit={handleSubmit(onSubmit)}
                 className="mt-8 space-y-6"
               >
@@ -71,7 +72,7 @@ function LoginPage() {
                       className="appearance-none relative block w-full px-3 py-2 border-gray-400
                      placeholder-gray-400 text-gray-900 rounded-md focus:outline-none border-[1px]
                       border- focus:ring-primary hover:border-primary focus:border-primary focus:z-10 sm:text-sm"
-                      placeholder="Usuario *"
+                      placeholder="Nombre de usuario *"
                     />
                     <span
                       className={`required-span ${
@@ -99,7 +100,7 @@ function LoginPage() {
                           onChange: handleChangePassword,
                         })}
                         className="appearance-none relative block w-full border-none focus:outline-none"
-                        placeholder="Ingresa tu contraseña *"
+                        placeholder="Contraseña *"
                       />
                       <button
                         type="button"
@@ -128,6 +129,7 @@ function LoginPage() {
                 {/* //BOTÓN DE INGRESAR */}
                 <div>
                   <button
+                  data-testid="btn-login"
                     type="submit"
                     className="group relative w-full flex justify-center py-2 px-4 border border-transparent
                        text-lg font-semibold rounded-md text-zinc-900 bg-primary hover:bg-primary-dark
@@ -145,4 +147,4 @@ function LoginPage() {
   );
 }
 
-export { LoginPage };
+export { Login };

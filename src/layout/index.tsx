@@ -1,9 +1,7 @@
 import { Outlet, useLocation } from "react-router-dom";
-import { useGlobal } from "../hooks/useGlobal";
-import { Navbar } from "../shared/components/header/navbar";
+import { Navbar } from "@shared/components/header/navbar";
 
 function Layout() {
-  const [global] = useGlobal();
   const location = useLocation();
 
   // Ocultar el Navbar si estamos en la página de login
@@ -12,7 +10,7 @@ function Layout() {
   return (
     <div className="w-full h-full">
       {!hideNavbar && <Navbar />}
-      <Outlet context={global} />
+      <Outlet />
     </div>
   );
 }

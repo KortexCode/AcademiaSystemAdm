@@ -6,16 +6,20 @@ import { HiCalendar } from "react-icons/hi";
 import { HiAcademicCap } from "react-icons/hi";
 import { HiCurrencyDollar } from "react-icons/hi";
 import { HiLogout } from "react-icons/hi";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import { useAuthenticated } from "../../../../hooks/useAuthenticated";
 
 function SidebarMenu(props: any) {
   const {closeMenu} = props;
-  const navigate = useNavigate();
+  const {logOut} = useAuthenticated();
 
-  const onCloseSession = () => {
+  const handleLogOut = () => {
+    console.log("CERRANDO SESIÓN")
     localStorage.clear();
-    navigate("/");
+    logOut();
   }
+
+
   const navlinkActived = (isActive:any) => {
     return isActive ? "flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 bg-gray-700 group" : "flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group";
   }
@@ -106,7 +110,7 @@ function SidebarMenu(props: any) {
             </li>
             <li>
               <button
-                onClick={onCloseSession}
+                onClick={handleLogOut}
                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
               >
                 <HiLogout

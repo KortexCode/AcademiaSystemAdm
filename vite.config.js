@@ -31,7 +31,7 @@ export default defineConfig(({ command, mode }) => {
           "@pages": resolve(__dirname, "src/pages"),
           "@shared": resolve(__dirname, "src/shared"),
           "@utils": resolve(__dirname, "src/utils"),
-          "@services": resolve(__dirname, "src/services"),
+          "@service": resolve(__dirname, "src/service"),
         },
       },
       plugins: [react()],
