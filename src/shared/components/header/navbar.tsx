@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useAuthenticated } from "../../../hooks/useAuthenticated";
+import { useAuthenticated } from "../../../context/useAuthenticated";
 import { Link } from "react-router-dom";
 import { HiMenuAlt1 } from "react-icons/hi";
 import { HiUser } from "react-icons/hi";

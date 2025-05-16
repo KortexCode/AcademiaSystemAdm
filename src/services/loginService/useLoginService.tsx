@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { useNavigate } from "react-router-dom";
-import { axiosInstance } from "../utils/axios.util";
-import { Alert } from '../utils/alerts';
-import { useAuthenticated } from '../hooks/useAuthenticated';
+import { axiosInstance } from "../../utils/axios.util";
+import { Alert } from '../../utils/alerts';
+import { useAuthenticated } from '../../context/useAuthenticated';
 
 type UserInfo ={
     user_name: string;
@@ -26,12 +26,11 @@ export function useLoginService() {
             if(data.status === "false"){
                 Alert.errorAlert(data.message); 
             }
-        } catch (error: any) {
-            console.log("data", error.response.data.message); //Se revisará la respuesta
-            Alert.errorAlert(error.response.data.message); 
-            
+        } catch (error: any) {  
+          console.log('el error', error) 
+          Alert.errorAlert(error.response.data.message);     
         } finally {
-            setIsLoading(false);
+          setIsLoading(false);
         }
     }
     //Servicio para validar usuario

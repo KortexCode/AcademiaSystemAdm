@@ -7,7 +7,7 @@ import { HiAcademicCap } from "react-icons/hi";
 import { HiCurrencyDollar } from "react-icons/hi";
 import { HiLogout } from "react-icons/hi";
 import { NavLink } from "react-router-dom";
-import { useAuthenticated } from "../../../../hooks/useAuthenticated";
+import { useAuthenticated } from "../../../../context/useAuthenticated";
 
 function SidebarMenu(props: any) {
   const {closeMenu} = props;

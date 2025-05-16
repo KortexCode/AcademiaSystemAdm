@@ -1,5 +1,5 @@
 import React, { ReactNode, useEffect } from 'react'
-import { useAuthenticated } from '../../../hooks/useAuthenticated';
+import { useAuthenticated } from '../../../context/useAuthenticated';
 import { useNavigate } from 'react-router-dom';
 
 interface RouteProtected {

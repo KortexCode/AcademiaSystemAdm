@@ -5,7 +5,7 @@ type ValidatedInputProps = {
 
 export function ValidatedInput({errors, name}: ValidatedInputProps) {
   return (
-    <span className={`required-span ${errors[name] && "span--actived"}`}>
+    <span data-testid={name} className={`required-span ${errors[name] && "span--actived"}`}>
                     {errors[name]?.message}
     </span>
   )

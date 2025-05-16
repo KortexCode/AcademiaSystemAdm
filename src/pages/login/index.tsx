@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useLoginService } from "../../service/useLoginService";
+import { useLoginService } from "../../services/loginService/useLoginService";
 import { ValidatedInput } from "@shared/components/validaterInput/validatedInput";
 import { AnimationLoader } from "@shared/components/loginLoader/animationLoader";
 import { HiEye } from "react-icons/hi";
@@ -26,7 +26,14 @@ function Login() {
     }
     postLoginInit(userInfo);
   };
-
+  //Validación de nombre de usuariodinámico
+  const handleChangeUserName = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // Si el campo ha sido tocado y hay errores, validamos al cambiar
+    if (touchedFields.user_name && errors.user_name) {
+      trigger('user_name'); // Forzar la validación del campo 'password'
+      return;
+    }
+  }
   //Validación de contraseña dinámico
   const handleChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
     // Si el campo ha sido tocado y hay errores, validamos al cambiar
@@ -48,9 +55,7 @@ function Login() {
             <div className="w-full flex justify-center">
               <img className="w-52" src={logo} alt="logo academia" />
             </div>
-            {isLoading &&
-              <AnimationLoader message="Validando inicio de sesión"/>
-            }
+            {isLoading &&<AnimationLoader message="Validando inicio de sesión"/>}
             {/* //FORMULARIO */}
             {!isLoading && (
               <form
@@ -66,6 +71,7 @@ function Login() {
                     <input
                       {...register("user_name", {
                         required: "Nombre de usuario obligatorio",
+                        onChange: handleChangeUserName,
                       })}
                       id="usuario"
                       type="text"
@@ -74,13 +80,7 @@ function Login() {
                       border- focus:ring-primary hover:border-primary focus:border-primary focus:z-10 sm:text-sm"
                       placeholder="Nombre de usuario *"
                     />
-                    <span
-                      className={`required-span ${
-                        errors.user_name && "span--actived"
-                      }`}
-                    >
-                      {errors.user_name?.message}
-                    </span>
+                    <ValidatedInput errors={errors} name="user_name" />
                   </div>
 
                   <div>
@@ -103,6 +103,7 @@ function Login() {
                         placeholder="Contraseña *"
                       />
                       <button
+                      data-testid="show-password"
                         type="button"
                         onMouseDown={(e) => {
                           setIsPasswordVisible(!isPasswordVisible);

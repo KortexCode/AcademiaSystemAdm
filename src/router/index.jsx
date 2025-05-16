@@ -13,7 +13,7 @@ import { AddAccountingView } from "../pages/addAccountingView";
 import { Login } from "@pages/login";
 import {ForgotPassword} from "@pages/forgotPasswordView/forgotPassword"
 import { Dashboard } from "@pages/dashboardView/dashboard";
-import { Persons } from "@pages/personsView/persons";
+import { Persons } from "@pages/persons";
 import {RouteProtected} from "@shared/components/routeProtected/index";
 
 const router = createHashRouter(

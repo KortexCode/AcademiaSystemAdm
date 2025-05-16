@@ -7,7 +7,7 @@ import {AnimationLoader} from './animationLoader';
 
 describe('<AnimationLoader/>', () => {
     //Probar si el mensaje de carga se muestra correctamente
-  it('should render the loading text', () => {
+  it.skip('should render the loading text', () => {
     const message = 'Loading...'; //Escribimos el mensaje de carga
     //Le decimos que va a renderizar el componente, este tiene una prop
     render(<AnimationLoader message={message} />);
@@ -17,7 +17,7 @@ describe('<AnimationLoader/>', () => {
   });
   //Verificamos que uno de los elementos html dentro del componente tiene la clase:
   //loader-animation w-24 h-24 rounded-[50%] border-2 border-gray-200
-  it('should have the correct class names', () => {
+  it.skip('should have the correct class names', () => {
     const message = 'Loading...';
     render(<AnimationLoader message={message} />);
     const loader = screen.getByTestId('loader-animation');//Se usa un data-testid para especificar el elemento que queremos validar

@@ -27,11 +27,12 @@ export default defineConfig(({ command, mode }) => {
       resolve: {
         alias: {
           "@": resolve(__dirname, "src"),
+          "@services": resolve(__dirname, "src/services"),
+          "@context": resolve(__dirname, "src/context"),
           "@assets": resolve(__dirname, "src/assets"),
           "@pages": resolve(__dirname, "src/pages"),
           "@shared": resolve(__dirname, "src/shared"),
           "@utils": resolve(__dirname, "src/utils"),
-          "@service": resolve(__dirname, "src/service"),
         },
       },
       plugins: [react()],

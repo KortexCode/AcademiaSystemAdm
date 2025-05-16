@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { HiEye } from "react-icons/hi";
-import { useLoginService } from '../../service/useLoginService';
+import { useLoginService } from '../../services/loginService/useLoginService';
 import { ValidatedInput } from '../../shared/components/validaterInput/validatedInput';
 import { Alert } from '../../utils/alerts';
 import { DateHour } from '../../utils/dateAndHour';

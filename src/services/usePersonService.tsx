@@ -6,8 +6,6 @@ export function usePersonService() {
       const response = await axiosInstance.get("persona/consulta/personas");
       const { data, message, status } = response.data;
       if (status === true) {
-        console.log("datos de la tabla", data);
-        console.log("mensaje", message);
         //Creamos una nueva propiedad id para el objeto por condición de la tabla de rect material
         const rowObject = data.map((item:any) => {
           item.id = item.id_persona;
