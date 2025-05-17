@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ArrowBackIcon } from "../components/arrowBackIcon";
+import { ArrowBackIcon } from "@shared/components/arrowBack";
 
 function AddAccountingView() {
   const [selectProgram, setSelectProgram] = useState([

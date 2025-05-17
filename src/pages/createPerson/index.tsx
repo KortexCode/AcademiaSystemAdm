@@ -1,14 +1,61 @@
 import { useState } from "react";
-import { ArrowBackIcon } from "../components/arrowBackIcon";
+import { useForm } from "react-hook-form";
+import { z } from 'zod';
+import { zodResolver } from "@hookform/resolvers/zod";
+import { ArrowBackIcon } from "@shared/components/arrowBack";
 
-function AddPersonView() {
+
+// Inferimos el tipo de nuestro esquema de Zod
+type personaInput = z.infer<typeof personaSchema>;
+type aprendizForm = z.infer<typeof aprendizSchema>;
+// Validación de formulario de usuario
+const personaSchema = z.object({
+  nombre: z.string().nonempty({ message: 'El nombre es obligatorio' }),
+  apellido: z.string().nonempty({ message: 'El apellido es obligatorio' }),
+  identificacion: z.string().nonempty({ message: 'La identificación es obligatorio' }),
+  edad: z.number()
+    .int({ message: 'La edad debe ser un número entero' })
+    .min(0, { message: 'La edad no puede ser negativa' }),
+  direccion: z.string().nonempty({ message: 'La dirección es obligatoria' }),
+  telefono: z.string().nonempty({ message: 'El teléfono es obligatorio' }),
+  correo: z.string()
+    .nonempty({ message: 'El correo es obligatorio' })
+    .email({ message: 'El formato del correo no es válido' }),
+  sexo: z.string().nonempty({ message: 'El sexo es obligatorio' }),
+  seguridad_social: z.string().nullable(),
+  patologia: z.string().nullable(),
+});
+
+
+const aprendizSchema = z.object({
+  acudiente: z.string().max(30, { message: "La ocupación no puede tener más de 30 caracteres." }),
+  telefono_acudiente: z.string().max(30, { message: "La ocupación no puede tener más de 30 caracteres." }),
+  telefono_alt_acudiente: z.string().max(30, { message: "La ocupación no puede tener más de 30 caracteres." }),
+  ocupacion: z.string()
+    .min(1, { message: "La ocupación es obligatoria." })
+    .max(30, { message: "La ocupación no puede tener más de 30 caracteres." }),
+  estado: z.enum(["Activo", "Inactivo"]),
+});
+
+
+function CreatePerson() {
+  //Configuración de los formualarios
+  const {
+    register: personaRegister, 
+    handleSubmit, 
+    formState: {errors: personaError, touchedFields: personaTouchedFields}, 
+    trigger: perso
+  } = useForm<personaInput>({mode: 'onBlur', resolver: zodResolver(personaSchema)});
+
+  //Estados del componente
   const [isStudent, setIsStudent] = useState(true);
-  const [textAreaValue, setTextAreaValue] = useState("");
 
-  const handleTextArea = (event) => {
+/*   const [textAreaValue, setTextAreaValue] = useState(""); */
+
+ /*  const handleTextArea = (event:) => {
     const text = event.target.value;
     setTextAreaValue(text);
-  };
+  }; */
 
   return (
     <div className="flex flex-col items-center min-h-screen bg-white px-4 py-4 sm:px-6 lg:px-8">
@@ -17,7 +64,7 @@ function AddPersonView() {
         <h1 className="text-3xl font-extrabold text-gray-900 text-center">
           Registrar Personas
         </h1>
-        <ArrowBackIcon root={"/menu/personas"} />
+        <ArrowBackIcon root={"/inicio/personas"} />
         {/* Formulario principal */}
         <form>
           <div className="space-y-4">
@@ -183,10 +230,9 @@ function AddPersonView() {
                 <textarea
                   name="textarea"
                   required
-                  rows="5"
-                  cols="50"
-                  onChange={handleTextArea}
-                  value={textAreaValue}
+                  rows={5}
+                  cols={50}
+                  value={"Aquí pondría mi valor, si tuviera un valor"}
                   className="px-4 py-2 border border-gray-400 rounded-md focus:outline-none focus:ring-primary focus:border-primary"
                 ></textarea>
               </div>
@@ -222,4 +268,4 @@ function AddPersonView() {
   );
 }
 
-export { AddPersonView };
+export { CreatePerson };

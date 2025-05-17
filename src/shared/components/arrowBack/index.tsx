@@ -1,13 +1,12 @@
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
-ArrowBackIcon.propTypes = {
-  root: PropTypes.string.isRequired,
-};
+interface ArrowBackIconProps {
+  root: string;
+}
 
-function ArrowBackIcon(props) {
-  const { root } = props;
-
+function ArrowBackIcon({root}: ArrowBackIconProps) {
+  
   return (
     <Link to={root} className="inline-block mt-4">
       <svg

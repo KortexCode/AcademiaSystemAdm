@@ -177,7 +177,7 @@ function Persons() {
           <div className="w-full flex justify-end">
             <div className="w-full me-2">
               <Link
-                to="/menu/personas/agregar-personas"
+                to="/inicio/personas/crear-personas"
                 className="inline-block"
               >
                 <button className="px-4 py-3 font-medium rounded-md text-zinc-900 bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">

@@ -5,15 +5,15 @@ import {
 } from "react-router-dom";
 import { Layout } from "../layout/index";
 import { NotFound } from "../pages/notFound";
-import { AddPersonView } from "../pages/addPersonView";
+import { Login } from "@pages/login";
+import {ForgotPassword} from "@pages/forgotPasswordView/forgotPassword"
+import { Persons } from "@pages/persons";
+import { CreatePerson } from "@pages/createPerson";
 import { ProgramView } from "../pages/programView";
 import { RegistrationView } from "../pages/registrationView";
 import { AccountingView } from "../pages/accountingView";
 import { AddAccountingView } from "../pages/addAccountingView";
-import { Login } from "@pages/login";
-import {ForgotPassword} from "@pages/forgotPasswordView/forgotPassword"
 import { Dashboard } from "@pages/dashboardView/dashboard";
-import { Persons } from "@pages/persons";
 import {RouteProtected} from "@shared/components/routeProtected/index";
 
 const router = createHashRouter(
@@ -22,10 +22,10 @@ const router = createHashRouter(
       <Route index={true} path="/" element={<Login />} />
       <Route path="/olvido-password" element={<ForgotPassword />} />
       <Route path="/inicio" element={<RouteProtected><Dashboard /></RouteProtected>} />
-      <Route path="/inicio/personas" element={<Persons />} />
+      <Route path="/inicio/personas" element={<RouteProtected><Persons /></RouteProtected>} />
       <Route
-        path="/menu/personas/agregar-personas"
-        element={<AddPersonView />}
+        path="/inicio/personas/crear-personas"
+        element={<RouteProtected><CreatePerson /></RouteProtected>}
       />
       <Route path="/inicio/programas" element={<ProgramView />} />
       <Route path="/menu/matricula" element={<RegistrationView />} />

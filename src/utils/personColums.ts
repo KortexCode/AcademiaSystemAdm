@@ -2,6 +2,7 @@ const columsPerson:any = [
   { field: "id", headerName: "ID", width: 70 },
   { field: "nombre", headerName: "Nombres", width: 130 },
   { field: "apellido", headerName: "Apellidos", width: 130 },
+  { field: "identificacion", headerName: "identidad", width: 130 },
   {
     field: "edad",
     headerName: "Edad",
@@ -21,6 +22,7 @@ const columnsProfesor:any = [
   { field: "estado", headerName: "estado", width: 130 },
   { field: "nombre", headerName: "Nombres", width: 130 },
   { field: "apellido", headerName: "Apellidos", width: 130 },
+  { field: "identificacion", headerName: "identidad", width: 130 },
   {
     field: "edad",
     headerName: "Edad",
@@ -48,6 +50,7 @@ const columnsAprendiz:any = [
   { field: "estado", headerName: "estado", width: 130 },
   { field: "nombre", headerName: "Nombres", width: 130 },
   { field: "apellido", headerName: "Apellidos", width: 130 },
+  { field: "identificacion", headerName: "identidad", width: 130 },
   {
     field: "edad",
     headerName: "Edad",

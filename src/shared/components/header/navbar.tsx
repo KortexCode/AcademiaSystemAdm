@@ -1,14 +1,10 @@
 import { useState } from "react";
-import { useAuthenticated } from "../../../context/useAuthenticated";
 import { Link } from "react-router-dom";
 import { HiMenuAlt1 } from "react-icons/hi";
-import { HiUser } from "react-icons/hi";
 import { HiHome } from "react-icons/hi";
-import { HiLogin } from "react-icons/hi";
 import { SidebarMenu } from "./components/sidebarMenu";
 import logo from "@assets/logoAca.png";
 import "./styles.css";
-
 
 function Navbar() {
 
@@ -18,7 +14,6 @@ function Navbar() {
     console.log("entrando", openMenu)
     setOpenMenu(!openMenu);
   };
-
 
   return (
     <>

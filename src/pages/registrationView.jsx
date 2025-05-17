@@ -1,5 +1,5 @@
 
-import { ArrowBackIcon } from "../components/arrowBackIcon";
+import { ArrowBackIcon } from "../shared/components/arrowBack";
 import { SelectProgramCategory } from "../components/selectProgramCategory";
 
 
