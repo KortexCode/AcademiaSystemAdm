@@ -1,19 +1,19 @@
 import { useEffect, useState, useRef } from "react";
-import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQueryClient } from "@tanstack/react-query";
 import { usePersonService } from "../../services/personService/usePersonService";
 import { useAprendizService } from "../../services/personService/useAprendizService";
-import { useProfesorService } from "../../services/personService/useProfesorService"
+import { useProfesorService } from "../../services/personService/useProfesorService";
 import { Link } from "react-router-dom";
 import { TableData } from "../../components/tableData";
+import { HiUserGroup } from "react-icons/hi";
+import { AnimationLoader } from "@shared/components/loginLoader/animationLoader";
 import { Alert } from "@utils/alerts";
 import {
   columsPerson,
   columnsAprendiz,
   columnsProfesor,
 } from "../../utils/personColums";
-import { HiUserGroup } from "react-icons/hi";
 import "./styles.css";
-import { AnimationLoader } from "@shared/components/loginLoader/animationLoader";
 
 function Persons() {
   const queryClient = useQueryClient();
@@ -22,6 +22,7 @@ function Persons() {
     data: personData,
     isLoading: personLoading,
     error: personError,
+    refetch: reFetchPerson,
   } = usePersonService();
   const {
     data: aprendizData,
@@ -35,36 +36,47 @@ function Persons() {
     error: instructorError,
     refetch: reFetchInstructor,
   } = useProfesorService();
-
   //Estados
   const [rows, setRows] = useState<any[] | undefined>([]);
   const [column, setColum] = useState([]);
-
   const [radioInputAll, setRadioInputAll] = useState(true);
   const [radioInputStundent, setRadioInputStudent] = useState(false);
   const [radioInputInstructor, setRadioInputInstructor] = useState(false);
-
+  //Maneja los cambios de estado cuando el usuario marca los checkboxes
   const handleShowAll = () => {
     setColum(columsPerson);
     setRadioInputAll(true);
     setRadioInputStudent(false);
     setRadioInputInstructor(false);
+    if(!personData && !personError) {
+      reFetchPerson();
+    }else {
+      setRows([]);
+    }
   };
   const handleShowStundents = () => {
     setColum(columnsAprendiz);
     setRadioInputStudent(true);
     setRadioInputAll(false);
     setRadioInputInstructor(false);
-    reFetchAprendiz();
+    if(!aprendizData && !aprendizError) {
+      reFetchAprendiz();
+    }else {
+      setRows([]);
+    }
   };
   const handleShowInstructors = () => {
     setColum(columnsProfesor);
     setRadioInputInstructor(true);
     setRadioInputAll(false);
     setRadioInputStudent(false);
-    reFetchInstructor();
+    if(!instructorData && !instructorError) {
+      reFetchInstructor();
+    }else {
+      setRows([]);
+    }
   };
-
+  //Maneja los cambios de estado cuando el usuario marca los checkbox y los datos se cargan
   useEffect(() => {
     if (radioInputAll && personData) {
       setColum(columsPerson);
@@ -84,33 +96,31 @@ function Persons() {
     radioInputStundent,
     radioInputInstructor,
   ]);
+  //Maneja los cambios de estado y mensajes de error cuando hay errores en la carga de datos
+  useEffect(() => {
+    if (personError || aprendizError || instructorError) {
+      if (instructorError) {
+        Alert.errorAlert(instructorError.message);
+        setRows([]);
+      } else if (aprendizError) {
+        Alert.errorAlert(aprendizError.message);
+        setRows([]);
+      }
+      if (personError) {
+        Alert.errorAlert(personError.message);
+        setRows([]);
+      }
+    }
+  }, [personError, aprendizError, instructorError]);
 
-  //Se extraen los datos de la API e información adicinal para establecer una lógica.
+  //Retorna animación cuando hay espera en la carga de datos
   if (personLoading || instructorLoading || aprendizLoading) {
-    console.log("carga", personLoading, aprendizLoading, instructorLoading)
+    console.log("carga", personLoading, aprendizLoading, instructorLoading);
     return (
       <div className="h-screen w-screen flex justify-center items-center">
         <AnimationLoader message="Cargando datos de la tabla..." />
       </div>
     );
-  }
-    //Manejo de errores
-  if (personError || aprendizError || instructorError){
-    if (instructorError) {
-      console.log("error", instructorError)
-      Alert.errorAlert(instructorError.message);
-      queryClient.resetQueries({ queryKey: ['profesores'] });
-    }
-    else if(aprendizError) {
-      Alert.errorAlert(aprendizError.message);
-    }
-    if (personError) {
-      Alert.errorAlert(personError.message);
-    }
-  }
-  if (!personData && !aprendizData && !instructorData) {
-    Alert.errorAlert("No hay registros disponibles");
-    return <div className="pt-24">No hay datos disponibles</div>;
   }
 
   return (
@@ -175,11 +185,6 @@ function Persons() {
                 </button>
               </Link>
             </div>
-            <input
-              type="text"
-              placeholder="Buscar personas..."
-              className="w-full sm:w-1/2 md:w-64 px-4 py-2 border border-gray-400 rounded-md focus:outline-none focus:ring-primary focus:border-primary"
-            />
           </div>
           {/* Tabla de resultados */}
           <div className="w-full mt-3">

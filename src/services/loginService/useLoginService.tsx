@@ -4,6 +4,8 @@ import { axiosInstance } from "../../utils/axios.util";
 import { Alert } from '../../utils/alerts';
 import { useAuthenticated } from '../../context/useAuthenticated';
 
+
+
 type UserInfo ={
     user_name: string;
     password: string
@@ -19,7 +21,7 @@ export function useLoginService() {
         try {
             const {data} = await axiosInstance.post('login/inicio-sesion', userInfo);
             if(data.status === "true") {
-                logIn(userInfo.user_name, data.token)
+                logIn(userInfo.user_name, "token")
                 Alert.succesAlert(data.message);
                 navigate("./inicio");
             }

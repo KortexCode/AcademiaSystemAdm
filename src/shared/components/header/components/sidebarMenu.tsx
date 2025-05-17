@@ -1,4 +1,6 @@
 import React from "react";
+import { useAuthenticated } from "../../../../context/useAuthenticated";
+import { NavLink } from "react-router-dom";
 import { HiX } from "react-icons/hi";
 import { HiHome } from "react-icons/hi";
 import { HiUsers } from "react-icons/hi";
@@ -6,8 +8,7 @@ import { HiCalendar } from "react-icons/hi";
 import { HiAcademicCap } from "react-icons/hi";
 import { HiCurrencyDollar } from "react-icons/hi";
 import { HiLogout } from "react-icons/hi";
-import { NavLink } from "react-router-dom";
-import { useAuthenticated } from "../../../../context/useAuthenticated";
+
 
 function SidebarMenu(props: any) {
   const {closeMenu} = props;
@@ -15,7 +16,6 @@ function SidebarMenu(props: any) {
 
   const handleLogOut = () => {
     console.log("CERRANDO SESIÓN")
-    localStorage.clear();
     logOut();
   }
 

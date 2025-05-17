@@ -4,28 +4,23 @@ import { Alert } from "@utils/alerts";
 import { axiosInstance } from "@utils/axios.util";
 
 const fetchAprendices: QueryFunction<Aprendiz[]> = async () => {
-    try {
-          const response = await axiosInstance.get("aprendiz/consulta/aprendices");
-          const { data, message, status } = response.data;
-          if (status === true) {
-        
-            const rowObject = data.map((item:any) => {
-              item.id = item.id_aprendiz;
-              delete item.id_aprendiz;
-              const personaArray = item.persona;
-        
-              delete item.persona;
-              return { ...item, ...personaArray };
-            });
-            return rowObject;
-          } 
-          if(status === false) {
-            Alert.errorAlert(message)
-          }
-        } catch (error: any) {
-          Alert.errorAlert(error.response.data.message)
-        }
-}
+  try {
+    const response = await axiosInstance.get("aprendiz/consulta/aprendices");
+    const { data } = response.data;
+
+    const rowObject = data.map((item: any) => {
+      item.id = item.id_aprendiz;
+      delete item.id_aprendiz;
+      const personaArray = item.persona;
+
+      delete item.persona;
+      return { ...item, ...personaArray };
+    });
+    return rowObject;
+  } catch (error: any) {
+    throw new Error(error.response.data.message);
+  }
+};
 
 export function useAprendizService() {
   return useQuery<Aprendiz[], Error>({

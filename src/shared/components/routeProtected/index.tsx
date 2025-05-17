@@ -1,6 +1,6 @@
-import React, { ReactNode, useEffect } from 'react'
-import { useAuthenticated } from '../../../context/useAuthenticated';
+import { ReactNode, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
+import { useAuthenticated } from '../../../context/useAuthenticated';
 
 interface RouteProtected {
     children : ReactNode;
@@ -9,10 +9,11 @@ interface RouteProtected {
 export function RouteProtected({children}: RouteProtected) {
   const navigate = useNavigate();
   const {userLogin} = useAuthenticated();
-
+  const localUserName = localStorage.getItem('username');
+  
  useEffect(() => {
-  if(!userLogin) {
-    console.log("navega", userLogin)
+  if(!userLogin?.userName && !localUserName) {
+    console.log("navega", userLogin?.userName)
     navigate('/');
   }
  });
